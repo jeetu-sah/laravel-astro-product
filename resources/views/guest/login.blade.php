@@ -41,6 +41,11 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
+                                    <div class="text-center">
+                                        @if(Session::has('msg'))
+                                        {!! Session::get("msg") !!}
+                                        @endif
+                                    </div>
                                     <form class="user" action="{{ route('guest.store') }}" method="POST">
                                         @csrf
                                         <div class="form-group">

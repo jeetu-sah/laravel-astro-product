@@ -49,11 +49,11 @@ class GuestController extends Controller
 
                 return redirect('/dashboard')->with(["msg" => "<div class='callout callout-success'><strong>Success </strong>  Login Successfully !!! </div>"]);
             } else {
-                return redirect()->back()->with(["msg" => "<div class='callout callout-danger'><strong>Wrong </strong>  password does not matched !!! </div>"]);
+                return redirect()->back()->with(["msg" => "<div class='bg-danger text-black'><strong>Wrong </strong>  password does not matched !!! </div>"]);
             }
         } else {
             // Admin not found or password incorrect, redirect back with error message
-            return redirect('/')->withErrors(['error' => 'Invalid email or password']);
+            return redirect('guest/')->with(["msg" => "<div class='bg-danger text-white'><strong>Wrong </strong>  User does not exists!!! </div>"]);
         }
     }
 
