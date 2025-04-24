@@ -37,10 +37,10 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form action="{{ route('category.store') }}" method="POST">
+                    <form action="{{ route('product.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="categoryName" class="small">Parent Category</label>
+                            <label for="categoryName" class="small">Select Product Category</label>
                             <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
                                 <option value="">Select parent Category</option>
                                 @forelse($categories as $category)
@@ -52,18 +52,63 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="categoryName" class="small">Category Name</label>
-                            <input type="text" class="form-control form-control-sm" id="categoryName" name="categoryName" placeholder="Enter Category Name" />
+                            <label for="productName" class="small">Product Name</label>
+                            <input type="text" class="form-control form-control-sm"
+                                id="productName"
+                                value="Demo Product"
+                                name="productName"
+                                placeholder="Enter Product Name" />
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="productCode" class="small">Product Code</label>
+                                <input type="text" value="DemoTest" class="form-control form-control-sm" id="productCode" name="productCode" placeholder="Enter Product Code" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="price" class="small">Price</label>
+                                <input type="number" class="form-control form-control-sm" id="price" name="price" placeholder="Price" value="10" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="sellingPrice" class="small">Selling Price</label>
+                                <input type="number" class="form-control form-control-sm" id="price" name="sellingPrice" placeholder="Selling Price" value="8" />
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="status" class="small">Status</label>
-                            <select name="status" id="status" class="form-control form-control-sm">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="quantity" class="small">Quantity</label>
+                                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" placeholder="Enter Product Quantity" value="100" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="alertQuantity" class="small">Alert Quantity</label>
+                                <input type="number" class="form-control form-control-sm" id="alertQuantity" name="alertQuantity" placeholder="Enter Alert Quantity" value="10" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="productType" class="small">Product Type</label>
+                                <select name="productType" id="productType" class="form-control form-control-sm">
+                                    <option value="simple-product">Simple Product</option>
+                                    <option value="group-product">Group Product</option>
+                                </select>
+                            </div>
 
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="productStatus" class="small">Status</label>
+                                <select name="productStatus" id="productStatus" class="form-control form-control-sm">
+                                    <option value="draft">Draft</option>
+                                    <option value="in-live">In Live</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="availableStatus" class="small">Available Status</label>
+                                <select name="availableStatus" id="availableStatus" class="form-control form-control-sm">
+                                    <option value="available">Available</option>
+                                    <option value="out-of-stock">Out Of Stock</option>
+                                </select>
+                            </div>
+
+                        </div>
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
