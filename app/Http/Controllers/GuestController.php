@@ -47,9 +47,9 @@ class GuestController extends Controller
                 $remember = $request->rememberMe ? true : false;
                 Auth::login($user, $remember);
 
-                return redirect('/dashboard')->with(["msg" => "<div class='callout callout-success'><strong>Success </strong>  Login Successfully !!! </div>"]);
+                return redirect('/dashboard')->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong>  Login Successfully !!! </div>"]);
             } else {
-                return redirect()->back()->with(["msg" => "<div class='bg-danger text-black'><strong>Wrong </strong>  password does not matched !!! </div>"]);
+                return redirect()->back()->with(["msg" => "<div class='bg-danger text-white'><strong>Wrong </strong>  password does not matched !!! </div>"]);
             }
         } else {
             // Admin not found or password incorrect, redirect back with error message

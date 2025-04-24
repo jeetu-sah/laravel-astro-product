@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->char('status')->nullable()->comment('active, inactive');
+            $table->char('status', 10)->nullable()->comment('active, inactive');
 
            $table->foreignIdFor(User::class)->nullable();
 

@@ -239,6 +239,11 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container-fluid">
+                    @if(Session::has('msg'))
+                    {!! Session::get("msg") !!}
+                    @endif
+                </div>
 
                 @yield('main-content')
 
