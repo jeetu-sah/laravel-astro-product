@@ -19,7 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ url('public/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+    @section('style')
+    @show
 </head>
 
 <body id="page-top">
@@ -307,7 +308,9 @@
     <!-- Page level custom scripts -->
     <script src="{{ url('public/assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url('public/assets/js/demo/chart-pie-demo.js') }}"></script>
-
+    
+    @section('script')
+    @show
 </body>
 
 </html>
