@@ -17,6 +17,6 @@ Run the below command on the terminal, in the root directory
 
 
 ## Run the Project 
-- php artisan serve
-- Project will run http://127.0.0.1:8000
+- Run the project on browser
+http://localhost/laravel-astro-product/guest
 
