@@ -19,6 +19,15 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ url('public/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+<!-- -------------------------------------------------------------------------------------- -->
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- -------------------------------------------------------------------------------------- -->
+    <!-- test search select scripts -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- -------------------------------------------------------------------------------------- -->
+
     @section('style')
     @show
 </head>
@@ -308,6 +317,38 @@
     <!-- Page level custom scripts -->
     <script src="{{ url('public/assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url('public/assets/js/demo/chart-pie-demo.js') }}"></script>
+<!-- -------------------------------------------------------------------------------------- -->
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+       const quillProduct = new Quill('#descriptionProductEditor', {
+        theme: 'snow'
+    });
+
+    const quillCategory = new Quill('#descriptionCategoryEditor', {
+        theme: 'snow'
+    });
+
+    document.querySelector('form').addEventListener('submit', function () {
+        document.querySelector('#descriptionProduct').value = quillProduct.root.innerHTML;
+        document.querySelector('#descriptionCategory').value = quillCategory.root.innerHTML;
+    });
+    </script>
+<!-- -------------------------------------------------------------------------------------- -->
+    <!-- search select -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Select parent Category",
+            allowClear: true
+        });
+    });
+    </script>
+<!-- -------------------------------------------------------------------------------------- -->
+    
+
     
     @section('script')
     @show
