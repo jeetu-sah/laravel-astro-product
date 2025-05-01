@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <form action="{{ route('category.store') }}" method="POST">
                         @csrf
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="categoryName" class="small">Parent Category</label>
                             <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
                                 <option value="">Select parent Category</option>
@@ -50,7 +50,19 @@
                                 @endforelse()
 
                             </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="parentCategory" class="small">Parent Category</label>
+                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm select2">
+                               <option value="">Select parent Category</option>
+                                @forelse($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @empty
+                                    <option value="">Parent Category Not available!!!</option>
+                                @endforelse
+                            </select>
                         </div>
+                        
                         <div class="form-group">
                             <label for="categoryName" class="small">Category Name</label>
                             <input type="text" class="form-control form-control-sm" id="categoryName" name="categoryName" placeholder="Enter Category Name" />
@@ -63,7 +75,13 @@
                                 <option value="inactive">Inactive</option>
                             </select>
                         </div>
-
+                        <!-- -------------------------------------------------------------------------------------- -->
+                        <div class="form-group">
+                            <label for="editor" class="small">Description <span class="text-danger">*</span></label>
+                            <div id="descriptionCategoryEditor" style="height: 200px;"></div>
+                            <input type="hidden" name="descriptionCategory" id="descriptionCategory"> 
+                        </div>
+                        <!-- -------------------------------------------------------------------------------------- -->
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
