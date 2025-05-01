@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ImageGallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
 
 class ImageGalleryController extends Controller
 {
@@ -13,6 +17,7 @@ class ImageGalleryController extends Controller
     public function index()
     {
         $data['title'] = 'Image Gallery | list';
+        $data['images'] = ImageGallery::take(12)->orderByDesc('id')->get();
         return view('imageGallery.list', $data);
     }
 
@@ -30,7 +35,34 @@ class ImageGalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'images' => 'required',
+        ], [
+            'images.required' => 'please choose the images.',
+        ]);
+        $imageNameArr = $request->imageName;
+        $imageNameAltArr = $request->altname;
+
+        if (count($request->images) > 0) {
+            foreach ($request->file('images') as $key =>  $image) {
+                $extension = $image->getClientOriginalExtension();
+                $filename = time() . '-' . Str::uuid() . '.' . $extension;
+                $picture = Storage::putFileAs("images_gallery", $image, $filename);
+
+                //store in database
+                ImageGallery::create([
+                    'image_name' => $imageNameArr[$key],
+                    'alt_name' => $imageNameAltArr[$key],
+                    'name' => $filename,
+                    'image_url' => $picture
+                ]);
+            }
+
+            return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong> Image upload successfully  !!! </div>"]);
+        } else {
+
+            return redirect()->back()->with(["msg" => "<div class='bg-danger text-white'><strong>Warning </strong> please choose the images  !!! </div>"]);
+        }
     }
 
     /**
@@ -62,6 +94,10 @@ class ImageGalleryController extends Controller
      */
     public function destroy(ImageGallery $imageGallery)
     {
-        //
+        if ($imageGallery->delete()) {
+            return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong> Image delete successfully  !!! </div>"]);
+        } else {
+            return redirect()->back()->with(["msg" => "<div class='bg-danger text-white'><strong>Warning </strong> Something went wrong, please try again  !!! </div>"]);
+        }
     }
 }

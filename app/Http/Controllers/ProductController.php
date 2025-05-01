@@ -61,7 +61,7 @@ class ProductController extends Controller
             'product_status'    => $request->productStatus,
             'product_type'      => $request->productType,
             'short_description' => null,
-            'description'       => null,
+            'description'       => $request->descriptionProduct,
         ]);
 
         if ($productResult) {

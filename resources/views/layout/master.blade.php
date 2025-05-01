@@ -331,8 +331,9 @@
     });
 
     document.querySelector('form').addEventListener('submit', function () {
+        console.log('tets')
         document.querySelector('#descriptionProduct').value = quillProduct.root.innerHTML;
-        document.querySelector('#descriptionCategory').value = quillCategory.root.innerHTML;
+        // document.querySelector('#descriptionCategory').value = quillCategory.root.innerHTML;
     });
     </script>
 <!-- -------------------------------------------------------------------------------------- -->

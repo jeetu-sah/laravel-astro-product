@@ -37,7 +37,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form action="{{ route('product.store') }}" method="POST">
+                    <form action="{{ route('image-gallery.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-4">
@@ -46,33 +46,52 @@
 
                         </div>
 
-                        <div class="form-group row" id="row-section">
+                        <div class="form-group row">
                             <div class="col-sm-4">
                                 <label for="imageName" class="small">Image Name</label>
                                 <input type="text" class="form-control form-control-sm"
-                                    id="imageName"
-                                    value="Image name"
-                                    name="imageName"
+                                    name="imageName[]"
+                                    value="test name"
                                     placeholder="Enter Image Name" />
                             </div>
                             <div class="col-sm-4">
-                                <label for="imageName" class="small">Image alt name</label>
+                                <label for="altname" class="small">Image alt name</label>
                                 <input type="text" class="form-control form-control-sm"
-                                    id="altName"
                                     value="Image alt name"
-                                    name="altName"
+                                    name="altname[]"
                                     placeholder="Enter Alt Name" />
                             </div>
                             <div class="col-sm-3">
                                 <label for="imageName" class="small">Choose File</label>
                                 <input type="file" class="form-control form-control-sm"
-                                    id="altName"
+                                    name="images[]"
+                                    placeholder="Enter Alt Name" />
+                            </div>
+
+                        </div>
+                        <div class="form-group row row-section-div" id="row-section" style="display: none;">
+                            <div class="col-sm-4">
+                                <label for="imageName" class="small">Image Name</label>
+                                <input type="text" class="form-control form-control-sm"
+                                    name="imageName[]"
+                                    value="test name"
+                                    placeholder="Enter Image Name" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="altname" class="small">Image alt name</label>
+                                <input type="text" class="form-control form-control-sm"
                                     value="Image alt name"
-                                    name="altName"
+                                    name="altname[]"
+                                    placeholder="Enter Alt Name" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="imageName" class="small">Choose File</label>
+                                <input type="file" class="form-control form-control-sm"
+                                    name="images[]"
                                     placeholder="Enter Alt Name" />
                             </div>
                             <div class="col-sm-1">
-                                <button style="margin-top: 25px;" type="submit" name="submit" id="submit" class="btn btn-danger form-control-sm"><i class="fas fa-fw fa-trash"></i></button>
+                                <button style="margin-top: 25px;" type="button" class="btn btn-danger form-control-sm removeButton"><i class="fas fa-fw fa-trash"></i></button>
                             </div>
                         </div>
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
@@ -85,21 +104,24 @@
 </div>
 <!-- /.container-fluid -->
 
+@endsection()
+
+
 @section('script')
 <script>
-    $(document).on('click', '#addMore', function() {
+    $(document).on('click', '#addMore', function(e) {
+        e.preventDefault();
         const rowSection = $('#row-section').html();
         const copySection = $("<div>", {
-            "class": "form-group row"
+            "class": "form-group row row-section-div"
         });
         copySection.append(rowSection)
-
         $('#row-section').after(copySection);
+    });
 
-        console.log('rowSection', copySection)
-
+    $(document).on('click', '.removeButton', function(e) {
+        e.preventDefault();
+        $(this).closest('.row-section-div').remove();
     })
 </script>
 @endsection
-
-@endsection()

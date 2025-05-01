@@ -45,7 +45,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            @forelse($images as $image)
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="{{ asset('storage/app/private/'.$image->image_url) }}" class="card-img-top img-fluid" alt="..." style="width: 18rem; height: 18rem">
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$image->image_name ?? ''}}</h5>
+                                        <h5 class="card-title">{{$image->alt_name ?? ''}}</h5>
+                                        <form action="{{ route('image-gallery.destroy', [$image->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @empty
+                            <div class="col-md-3">
                                 <div class="card" style="width: 18rem;">
                                     <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="card-img-top" alt="...">
 
@@ -54,30 +72,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="card-img-top" alt="...">
-
-                                    <div class="card-body">
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="card-img-top" alt="...">
-
-                                    <div class="card-body">
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
-                    </form>
+                        @if($images->count() < 12)
+                            <div class="row mt-5" style="display:flex; justify-content: center;">
+
+                            <button type="button" class="btn btn-primary form-control-sm" name="savePhotos" id="savePhotos">Load More</button>
                 </div>
+                @endif
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 <!-- /.container-fluid -->

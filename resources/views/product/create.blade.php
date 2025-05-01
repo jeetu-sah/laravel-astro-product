@@ -52,16 +52,16 @@
                             </select>
                         </div> -->
                         <div class="form-group">
-    <label for="parentCategory" class="small">Select Product Category</label>
-    <select name="parentCategory" id="parentCategory" class="form-control form-control-sm select2">
-        <option value="">Select parent Category</option>
-        @forelse($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @empty
-            <option value="">Parent Category Not available!!!</option>
-        @endforelse
-    </select>
-</div>
+                            <label for="parentCategory" class="small">Select Product Category</label>
+                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm select2">
+                                <option value="">Select parent Category</option>
+                                @forelse($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @empty
+                                <option value="">Parent Category Not available!!!</option>
+                                @endforelse
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label for="productName" class="small">Product Name</label>
@@ -119,12 +119,16 @@
                                     <option value="out-of-stock">Out Of Stock</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
                                 <label for="editor" class="small">Description <span class="text-danger">*</span></label>
                                 <div id="descriptionProductEditor" style="height: 200px;"></div>
-                                <input type="hidden" name="descriptionProduct" id="descriptionProduct"> 
+                                <div style="display:none;">
+                                    <input type="text" name="descriptionProduct" id="descriptionProduct" />
+                                </div>
                             </div>
-
                         </div>
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -136,3 +140,11 @@
 </div>
 <!-- /.container-fluid -->
 @endsection()
+@section('script')
+<script>
+    $(document).on('blur', '#descriptionProductEditor', function(e) {
+        e.preventDefault();
+        $('#descriptionProduct').val(quillProduct.root.innerHTML);
+    });
+</script>
+@endsection
