@@ -15,6 +15,7 @@ Run the below command on the terminal, in the root directory
 - php artisan migrate
 - php artisan db:seed --class=AdminSeeder
 - php artisan key:generate
+- php artisan storage:link
 
 
 ## Run the Project 
