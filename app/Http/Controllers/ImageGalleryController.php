@@ -12,7 +12,8 @@ class ImageGalleryController extends Controller
      */
     public function index()
     {
-        //
+        $data['title'] = 'Image Gallery | list';
+        return view('imageGallery.list', $data);
     }
 
     /**
