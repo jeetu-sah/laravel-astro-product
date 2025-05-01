@@ -20,5 +20,5 @@ Run the below command on the terminal, in the root directory
 - Run the project on a browser <br />
   http://localhost/laravel-astro-product/guest
 - Admin Credential
-  Username: jsadmin@gmail.com
+  Username: jsadmin@gmail.com <br />
   password: @Admin@123#
