@@ -41,11 +41,12 @@
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-4">
-                                <button type="submit" name="submit" id="submit" class="btn btn-success"><i class="fas fa-fw fa-plus"></i></button>
+                                <button type="button" id="addMore" class="btn btn-success"><i class="fas fa-fw fa-plus"></i></button>
                             </div>
 
                         </div>
-                        <div class="form-group row">
+
+                        <div class="form-group row" id="row-section">
                             <div class="col-sm-4">
                                 <label for="imageName" class="small">Image Name</label>
                                 <input type="text" class="form-control form-control-sm"
@@ -83,4 +84,22 @@
 
 </div>
 <!-- /.container-fluid -->
+
+@section('script')
+<script>
+    $(document).on('click', '#addMore', function() {
+        const rowSection = $('#row-section').html();
+        const copySection = $("<div>", {
+            "class": "form-group row"
+        });
+        copySection.append(rowSection)
+
+        $('#row-section').after(copySection);
+
+        console.log('rowSection', copySection)
+
+    })
+</script>
+@endsection
+
 @endsection()
