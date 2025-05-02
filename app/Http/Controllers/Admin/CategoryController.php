@@ -41,13 +41,21 @@ class CategoryController extends Controller
             'status' => 'required',
         ]);
 
-        $result = Category::create([
+        $insertRecord = [
             'parent_category_id' => $request->parentCategory ?? NULL,
             'slug_name' => Str::slug($request->categoryName, '-'),
-            'name' => $request->categoryName,
             'status' => $request->status,
             'user_id' => Auth::id(),
-        ]);
+            'translations' => [
+                'en' => [
+                    'name' => $request->categoryName,
+                    'short_description' => $request->shortDescription,
+                    'description' => $request->descriptionCategory
+                ]
+            ]
+        ];
+
+        $result = Category::create($insertRecord);
 
         if ($result) {
             return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong>  Record Insert Successfully !!! </div>"]);

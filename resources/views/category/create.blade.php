@@ -6,7 +6,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Category List</h1>
+        <h1 class="h3 mb-0 text-gray-800">Create Category</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
@@ -19,7 +19,7 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Category list</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Create Category</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,30 +39,18 @@
                 <div class="card-body">
                     <form action="{{ route('category.store') }}" method="POST">
                         @csrf
-                        <!-- <div class="form-group">
-                            <label for="categoryName" class="small">Parent Category</label>
-                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
-                                <option value="">Select parent Category</option>
-                                @forelse($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @empty
-                                <option value="">Parent Category Not available!!!</option>
-                                @endforelse()
-
-                            </select>
-                        </div> -->
                         <div class="form-group">
                             <label for="parentCategory" class="small">Parent Category</label>
                             <select name="parentCategory" id="parentCategory" class="form-control form-control-sm select2">
-                               <option value="">Select parent Category</option>
+                                <option value="">Select parent Category</option>
                                 @forelse($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @empty
-                                    <option value="">Parent Category Not available!!!</option>
+                                <option value="">Parent Category Not available!!!</option>
                                 @endforelse
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="categoryName" class="small">Category Name</label>
                             <input type="text" class="form-control form-control-sm" id="categoryName" name="categoryName" placeholder="Enter Category Name" />
@@ -75,13 +63,23 @@
                                 <option value="inactive">Inactive</option>
                             </select>
                         </div>
-                        <!-- -------------------------------------------------------------------------------------- -->
+
                         <div class="form-group">
-                            <label for="editor" class="small">Description <span class="text-danger">*</span></label>
-                            <div id="descriptionCategoryEditor" style="height: 200px;"></div>
-                            <input type="hidden" name="descriptionCategory" id="descriptionCategory"> 
+                            <label for="editor" class="small">Short Description </label>
+                            <textarea type="text" class="form-control form-control-sm"
+                                id="shortDescription" 
+                                name="shortDescription" 
+                                placeholder="Enter Category Name"></textarea>
+
                         </div>
-                        <!-- -------------------------------------------------------------------------------------- -->
+                        <div class="form-group">
+                            <label for="editor" class="small">Description </label>
+                            <div id="descriptionCategoryEditor" style="height: 200px;"></div>
+                            <div style="display: none;">
+                                <input type="text" name="descriptionCategory" id="descriptionCategory" />
+                            </div>
+                        </div>
+
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -92,3 +90,14 @@
 </div>
 <!-- /.container-fluid -->
 @endsection()
+@section('script')
+<script>
+    const quillCategory = new Quill('#descriptionCategoryEditor', {
+        theme: 'snow'
+    });
+    $(document).on('blur', '#descriptionCategoryEditor', function(e) {
+        e.preventDefault();
+        $('#descriptionCategory').val(quillCategory.root.innerHTML);
+    });
+</script>
+@endsection

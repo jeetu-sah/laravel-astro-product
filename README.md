@@ -24,3 +24,7 @@ Run the below command on the terminal, in the root directory
 - Admin Credential <br />
   Username: jsadmin@gmail.com <br />
   password: @Admin@123#
+
+
+## Required Packages 
+- [laravel-translatable](https://github.com/Astrotomic/laravel-translatable)

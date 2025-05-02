@@ -142,6 +142,9 @@
 @endsection()
 @section('script')
 <script>
+    const quillProduct = new Quill('#descriptionProductEditor', {
+        theme: 'snow'
+    });
     $(document).on('blur', '#descriptionProductEditor', function(e) {
         e.preventDefault();
         $('#descriptionProduct').val(quillProduct.root.innerHTML);
