@@ -95,4 +95,56 @@ class CategoryController extends Controller
     {
         //
     }
+
+    /**
+     * get the specified.
+     */
+    public function list()
+    {
+        $limit = request()->input('length');
+        $start = request()->input('start');
+        $totalRecord = Category::count();
+
+
+        $categoryQuery = Category::query();
+        $categories = $categoryQuery->skip($start)->take($limit)->get();
+
+        $row = [];
+        if ($categories->count() > 0) {
+            $i = 1;
+            foreach ($categories as $user) {
+                $change_credential = NULL;
+                $edit_btn = '<a href="' . url("admin/reviewers/edit/" . $user->id) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+						<i class="fas fa-edit"></i> 
+					  </a>';
+
+                //if(Auth::user()->isAbleTo('change-user-credential')){
+                $change_credential = '<a href="' . url("admin/edit_credential/" . $user->id) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-success" style="margin-right: 5px;">
+						<i class="fas fa-key"></i> 
+					  </a>';
+                //}
+                $row = [];
+                $row['sn'] = '<a href="' . url("admin/roles/user_permission/$user->id?page=roles") . '">' . $user->id . '</a>';;
+
+                $row['name'] = $user->name;
+
+                $row['status'] = $user->status;
+
+                $row['action'] = $edit_btn . " " . $change_credential;
+
+                $rows[] = $row;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval(request()->input('draw')),
+            "recordsTotal"    => intval($totalRecord),
+            "recordsFiltered" => intval($totalRecord),
+            "data"            => $rows
+        );
+        // echo "<pre>";
+        // print_r($json_data);exit;
+        return json_encode($json_data);
+        exit;
+    }
 }

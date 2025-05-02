@@ -15,7 +15,12 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard', DashboardController::class);
+    // Category Route start
+    Route::get('category/agaxList', [CategoryController::class, 'list']);
     Route::resource('category', CategoryController::class);
+
+    // Product Route start
     Route::resource('product', ProductController::class);
+    
     Route::resource('image-gallery', ImageGalleryController::class);
 });

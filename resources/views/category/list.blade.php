@@ -40,11 +40,11 @@
                     <table id="myAjaxTable" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>SN</th>
                                 <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Image</th>
+                                <th>Status</th>
+                             
+                           
                                 <th>Action Btns</th>
                             </tr>
                         </thead>
@@ -57,3 +57,45 @@
 </div>
 <!-- /.container-fluid -->
 @endsection()
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        new DataTable('#myAjaxTable', {
+                responsive: true,
+                ajax: {
+                    url: "{{ url('category/agaxList') }}",
+                    data: function(d) {
+                        // Custom parameters can be added here if needed
+                        // Example:
+                        // d.filter = $('#filter-input').val();
+                    }
+                },
+                columns: [{
+                        data: 'sn'
+                    },
+
+                    {
+                        data: 'name'
+                    },
+
+                    {
+                        data: 'status'
+                    },
+
+
+                    
+                    {
+                        data: 'action',
+
+                        orderable: false
+                    }
+                ],
+
+                processing: true,
+                serverSide: true
+            });
+    });
+</script>
+
+@endsection

@@ -69,7 +69,7 @@
                             <textarea type="text" class="form-control form-control-sm"
                                 id="shortDescription" 
                                 name="shortDescription" 
-                                placeholder="Enter Category Name"></textarea>
+                                placeholder="Enter Short Description"></textarea>
 
                         </div>
                         <div class="form-group">
