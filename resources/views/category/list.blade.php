@@ -37,31 +37,18 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="categoryName" class="small">Parent Category</label>
-                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
-                                <option value="">Select parent Category</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="categoryName" class="small">Category Name</label>
-                            <input type="text" class="form-control form-control-sm" id="categoryName" name="categoryName" placeholder="Enter Category Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1" class="small">Password</label>
-                            <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="status" class="small">Status</label>
-                            <select name="status" id="status" class="form-control form-control-sm">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                      
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <table id="myAjaxTable" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Image</th>
+                                <th>Action Btns</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
