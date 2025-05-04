@@ -93,7 +93,12 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+        if ($category->delete()) {
+            return json_encode(array(['status' => 200, 'msg' => __('messages.record_delete_successfully')]));
+        } else {
+            return json_encode(array(['status' => 200, 'msg' => __('messages.something_went_wrong')]));
+        }
     }
 
     /**
@@ -109,26 +114,26 @@ class CategoryController extends Controller
         $categoryQuery = Category::query();
         $categories = $categoryQuery->skip($start)->take($limit)->get();
 
-        $row = [];
+        $rows = [];
         if ($categories->count() > 0) {
             $i = 1;
-            foreach ($categories as $user) {
+            foreach ($categories as $category) {
                 $change_credential = NULL;
-                $edit_btn = '<a href="' . url("admin/reviewers/edit/" . $user->id) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+                $edit_btn = '<a href="' . route("category.edit", [$category->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 						<i class="fas fa-edit"></i> 
 					  </a>';
 
                 //if(Auth::user()->isAbleTo('change-user-credential')){
-                $change_credential = '<a href="' . url("admin/edit_credential/" . $user->id) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-success" style="margin-right: 5px;">
-						<i class="fas fa-key"></i> 
+                $change_credential = '<a href="' . route("category.destroy", [$category->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
+						<i class="fas fa-trash"></i> 
 					  </a>';
                 //}
                 $row = [];
-                $row['sn'] = '<a href="' . url("admin/roles/user_permission/$user->id?page=roles") . '">' . $user->id . '</a>';;
+                $row['sn'] = '<a href="' . url("admin/roles/user_permission/$category->id?page=roles") . '">' . $category->id . '</a>';;
 
-                $row['name'] = $user->name;
+                $row['name'] = $category->name;
 
-                $row['status'] = $user->status;
+                $row['status'] = $category->status;
 
                 $row['action'] = $edit_btn . " " . $change_credential;
 
@@ -142,8 +147,7 @@ class CategoryController extends Controller
             "recordsFiltered" => intval($totalRecord),
             "data"            => $rows
         );
-        // echo "<pre>";
-        // print_r($json_data);exit;
+
         return json_encode($json_data);
         exit;
     }

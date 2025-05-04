@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Category extends Model implements TranslatableContract
 {
     use Translatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +22,8 @@ class Category extends Model implements TranslatableContract
         'parent_category_id',
         'slug_name',
         'status',
-        'user_id'
+        'user_id',
+        'deleted_at'
     ];
 
     public $translatedAttributes = ['name', 'short_description', 'description'];

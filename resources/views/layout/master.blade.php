@@ -31,6 +31,8 @@
     <!-- test search select scripts -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- -------------------------------------------------------------------------------------- -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     @section('style')
     @show
@@ -324,7 +326,7 @@
     <!-- -------------------------------------------------------------------------------------- -->
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-   
+
     <!-- -------------------------------------------------------------------------------------- -->
 
     <!-- Quill JS -->
@@ -333,6 +335,11 @@
     <!-- search select -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $(document).ready(function() {
             $('.select2').select2({
                 placeholder: "Select parent Category",

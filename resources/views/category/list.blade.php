@@ -43,9 +43,7 @@
                                 <th>SN</th>
                                 <th>Name</th>
                                 <th>Status</th>
-                             
-                           
-                                <th>Action Btns</th>
+                                <th>Action </th>
                             </tr>
                         </thead>
                     </table>
@@ -53,7 +51,30 @@
             </div>
         </div>
     </div>
+</div>
 
+<div class="modal" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form action="" method="POST" id="deleteCategoryForm">
+            @method('DELETE')
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure want to delete this record?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <!-- /.container-fluid -->
 @endsection()
@@ -61,40 +82,71 @@
 @section('script')
 <script>
     $(document).ready(function() {
+
+
         new DataTable('#myAjaxTable', {
-                responsive: true,
-                ajax: {
-                    url: "{{ url('category/agaxList') }}",
-                    data: function(d) {
-                        // Custom parameters can be added here if needed
-                        // Example:
-                        // d.filter = $('#filter-input').val();
-                    }
+            responsive: true,
+            ajax: {
+                url: "{{ url('category/agaxList') }}",
+                data: function(d) {
+                    // Custom parameters can be added here if needed
+                    // Example:
+                    // d.filter = $('#filter-input').val();
+                }
+            },
+            columns: [{
+                    data: 'sn'
                 },
-                columns: [{
-                        data: 'sn'
-                    },
 
-                    {
-                        data: 'name'
-                    },
+                {
+                    data: 'name'
+                },
 
-                    {
-                        data: 'status'
-                    },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'action',
 
+                    orderable: false
+                }
+            ],
 
-                    
-                    {
-                        data: 'action',
+            processing: true,
+            serverSide: true
+        });
 
-                        orderable: false
-                    }
-                ],
+        //on delete button click.
+        $(document).on('click', '.deleteCategory', function(e) {
+            e.preventDefault();
+            const routeUrl = $(this).attr('href');
+            $("#deleteCategoryForm").attr('action', routeUrl);
 
-                processing: true,
-                serverSide: true
+            $('#myModal').modal({
+                keyboard: false,
+                show: true,
+                backdrop: 'static'
+            })
+        })
+
+        //deleteCategoryForm
+        $(document).on('submit', '#deleteCategoryForm', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'DELETE',
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: async function(response) {
+                    await $('#myAjaxTable').DataTable().ajax.reload(null, false);
+                },
+                error: function(xhr) {
+                    alert('Something went wrong!');
+                    console.log(xhr.responseText);
+                }
             });
+        });
     });
 </script>
 
