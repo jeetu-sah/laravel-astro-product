@@ -37,7 +37,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <table id="myAjaxTable" class="display" style="width:100%">
+                    <table id="categoryAjaxTable" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>SN</th>
@@ -84,7 +84,7 @@
     $(document).ready(function() {
 
 
-        new DataTable('#myAjaxTable', {
+        new DataTable('#categoryAjaxTable', {
             responsive: true,
             ajax: {
                 url: "{{ url('category/agaxList') }}",
@@ -139,7 +139,7 @@
                 cache: false,
                 processData: false,
                 success: async function(response) {
-                    await $('#myAjaxTable').DataTable().ajax.reload(null, false);
+                    await $('#categoryAjaxTable').DataTable().ajax.reload(null, false);
                 },
                 error: function(xhr) {
                     alert('Something went wrong!');

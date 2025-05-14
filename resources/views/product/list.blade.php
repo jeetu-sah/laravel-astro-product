@@ -66,14 +66,13 @@
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form> -->
 
-                    <table id="myAjaxTable" class="display" style="width:100%">
+                    <table id="productsAjaxTable" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Products No.</th>
                                 <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
                                 <th>Image</th>
+                                <th>Status</th>
                                 <th>Action Btns</th>
                             </tr>
                         </thead>
@@ -86,3 +85,47 @@
 </div>
 <!-- /.container-fluid -->
 @endsection()
+
+@section('script')
+<script>
+    $(document).ready(function() {
+
+
+        new DataTable('#productsAjaxTable', {
+            responsive: true,
+            ajax: {
+                url: "{{ url('product/agaxList') }}",
+                data: function(d) {
+                    // Custom parameters can be added here if needed
+                    // Example:
+                    // d.filter = $('#filter-input').val();
+                }
+            },
+            columns: [{
+                    data: 'product_code'
+                },
+
+                {
+                    data: 'name'
+                },
+
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'action',
+
+                    orderable: false
+                }
+            ],
+
+            processing: true,
+            serverSide: true
+        });
+    });
+</script>
+
+@endsection
