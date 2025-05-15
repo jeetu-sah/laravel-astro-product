@@ -82,8 +82,6 @@
 @section('script')
 <script>
     $(document).ready(function() {
-
-
         new DataTable('#categoryAjaxTable', {
             responsive: true,
             ajax: {

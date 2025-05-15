@@ -90,6 +90,9 @@ class ProductController extends Controller
     {
         $data['title'] = 'Product Edit';
         $data['product'] = $product;
+        $data['productsImages'] = $product->images;
+        // echo "<pre>";
+        // print_r($data['productsImages'][0]->pivot->id);exit;
         return view('product.edit', $data);
     }
 
@@ -106,14 +109,38 @@ class ProductController extends Controller
      */
     public function destroy(Product $product) {}
 
-    public function uploadImage($id)
+    public function uploadImage(Request $request, $id)
     {
-        $data['title'] = 'Upload Product Images';
         $data['product'] = Product::find($id);
-         $data['images'] = ImageGallery::take(12)->orderByDesc('id')->get();
-        return view('product.upload-image', $data);
-        // echo "<pre>";
-        // print_r($product);exit;
+
+        if ($request->isMethod('get')) {
+            $data['title'] = 'Upload Product Images';
+            $data['images'] = ImageGallery::take(12)->orderByDesc('id')->get();
+            return view('product.upload-image', $data);
+        }
+
+        if ($request->isMethod('post')) {
+
+            if (count($request->images) > 0) {
+                $data['product']->images()->attach($request->images);
+
+                return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong> Images save successfully !!! </div>"]);
+            } else {
+                return redirect()->back()->with(["msg" => "<div class='bg-warning text-white'><strong>Warning </strong> Please select at least one photo !!! </div>"]);
+            }
+        }
+    }
+
+    public function removeImage($productId, $productImageId)
+    {
+        $product = Product::find($productId);
+        if ($product) {
+            $product->images()->detach($productImageId);
+
+            return json_encode(['status' => 200, 'msg' => __('messages.record_delete_successfully')]);
+        } else {
+            return json_encode(['status' => 200, 'msg' => __('messages.something_went_wrong')]);
+        }
     }
 
     public function list()
@@ -123,13 +150,14 @@ class ProductController extends Controller
         $totalRecord = Product::count();
 
 
-        $productQuery = Product::query();
+        $productQuery = Product::with(['images']);
         $products = $productQuery->skip($start)->take($limit)->get();
 
         $rows = [];
         if ($products->count() > 0) {
             $i = 1;
             foreach ($products as $product) {
+                
                 $change_credential = NULL;
                 $edit_btn = '<a href="' . route("product.edit", [$product->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 						<i class="fas fa-edit"></i> 
@@ -141,11 +169,12 @@ class ProductController extends Controller
 					  </a>';
                 //}
                 $row = [];
-                $row['product_code'] = '<a href="' . url("admin/roles/user_permission/$product->product_code") . '">' . $product->product_code . '</a>';;
+                $row['product_code'] = '<a href="' . route("product.edit", [$product->id]) . '">' . $product->product_code . '</a>';;
 
                 $row['name'] = $product->product_name;
 
-                $row['images'] = $product->product_status;
+
+                $row['images'] = '<img src="'.$product->productFirstImagePath.'" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">' ;
                 $row['status'] = $product->product_status;
 
                 $row['action'] = $edit_btn . " " . $change_credential;

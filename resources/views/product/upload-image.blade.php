@@ -7,8 +7,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Upload Products Image</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <a href='{{ url("product/$product->id/edit") }}' class="d-none d-sm-inline-block btn btn-sm btn-info"><i
+                class="fas fa-arrow-left"></i> Back</a>
     </div>
 
     <!-- Content Row -->
@@ -37,13 +37,13 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form action="{{ route('product.store') }}" method="POST">
+                    <form action='{{ url("product/$product->id/upload-image") }}' method="POST">
                         @csrf
                         <div class="row mb-5">
                             <div class="col-md-12" style="display: flex; justify-content: space-between">
                                 <div style="display: inline-flex;">
-                                    <input type="text" class="form-control" name="searchText" id="searchText"  /> &nbsp; &nbsp; 
-                                    <button type="submit" class="btn btn-success form-control-sm" name="savePhotos" id="savePhotos"><i class="fas fa-fw fa-search"></i>&nbsp;Upload Images</button>
+                                    <input type="text" class="form-control" name="searchText" id="searchText" /> &nbsp; &nbsp;
+                                    <button type="submit" class="btn btn-success form-control-sm" name="searchPhotos" id="searchPhotos"><i class="fas fa-fw fa-search"></i>&nbsp;Upload Images</button>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-primary form-control-sm" name="savePhotos" id="savePhotos"><i class="fas fa-fw fa-images"></i>&nbsp;Upload Images</button>
@@ -59,7 +59,10 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{$image->image_name ?? ''}}</h5>
                                         <h5 class="card-title">{{$image->alt_name ?? ''}}</h5>
-
+                                        <div class="custom-control custom-checkbox large">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck{{$image->id}}" name="images[]" value="{{ $image->id }}" />
+                                            <label class="custom-control-label" for="customCheck{{$image->id}}">Select Image</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

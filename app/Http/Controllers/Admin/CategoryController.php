@@ -95,9 +95,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category->delete()) {
-            return json_encode(array(['status' => 200, 'msg' => __('messages.record_delete_successfully')]));
+            return json_encode(['status' => 200, 'msg' => __('messages.record_delete_successfully')]);
         } else {
-            return json_encode(array(['status' => 200, 'msg' => __('messages.something_went_wrong')]));
+            return json_encode(['status' => 200, 'msg' => __('messages.something_went_wrong')]);
         }
     }
 

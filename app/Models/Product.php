@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class Product extends Model
 {
@@ -35,4 +39,24 @@ class Product extends Model
         'short_description',
         'description',
     ];
+
+
+    public function images(): BelongsToMany
+    {
+        return $this->belongsToMany(ImageGallery::class, 'product_images', 'product_id', 'image_id')->withPivot('id');
+    }
+
+    public function productFirstImageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->images->first()?->image_url ?? '',
+        );
+    }
+
+    public function productFirstImagePath(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => ($this->productFirstImageUrl) ? asset('storage/app/private/' . $this->productFirstImageUrl) : null,
+        );
+    }
 }

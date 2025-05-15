@@ -69,9 +69,9 @@
                     <table id="productsAjaxTable" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Products No.</th>
                                 <th>Name</th>
-                                <th>Image</th>
                                 <th>Status</th>
                                 <th>Action Btns</th>
                             </tr>
@@ -101,7 +101,11 @@
                     // d.filter = $('#filter-input').val();
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    data: 'images'
+                },
+                {
                     data: 'product_code'
                 },
 
@@ -112,9 +116,7 @@
                 {
                     data: 'status'
                 },
-                {
-                    data: 'status'
-                },
+                
                 {
                     data: 'action',
 
