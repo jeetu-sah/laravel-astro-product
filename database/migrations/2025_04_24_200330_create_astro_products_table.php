@@ -25,6 +25,7 @@ return new class extends Migration
             $table->smallInteger('alert_quantity')->default(0);
 
             $table->string('availibility', 10);
+            $table->string('product_sku',20);
             $table->string('product_status', 10);
             $table->string('product_type', 20);
             $table->text('short_description')->nullable();

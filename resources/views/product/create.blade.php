@@ -119,6 +119,11 @@
                                     <option value="out-of-stock">Out Of Stock</option>
                                 </select>
                             </div>
+                            <div class="col-sm-4">
+                                <label for="availableStatus" class="small">Product SKU</label>
+                                <input type="text" class="form-control form-control-sm" id="product_sku" name="product_sku" placeholder="Enter Alert Quantity" value="PRODUCTSKU" />
+
+                            </div>
 
                         </div>
                         <div class="form-group row">

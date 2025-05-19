@@ -62,6 +62,7 @@ class ProductController extends Controller
             'quantity'      => $request->quantity,
             'alert_quantity'    => $request->alertQuantity,
             'availibility'      => $request->availableStatus,
+            'availibility'      => $request->product_sku,
             'product_status'    => $request->productStatus,
             'product_type'      => $request->productType,
             'short_description' => null,
@@ -172,6 +173,7 @@ class ProductController extends Controller
                 $row['product_code'] = '<a href="' . route("product.edit", [$product->id]) . '">' . $product->product_code . '</a>';;
 
                 $row['name'] = $product->product_name;
+                $row['product_sku'] = $product->product_sku;
 
 
                 $row['images'] = '<img src="'.$product->productFirstImagePath.'" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">' ;

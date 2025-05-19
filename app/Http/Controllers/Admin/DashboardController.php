@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -62,5 +63,11 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('guest/')->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong> Logged out successfully  !!! </div>"]);
     }
 }

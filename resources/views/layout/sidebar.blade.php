@@ -32,12 +32,26 @@
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
              aria-expanded="true" aria-controls="collapseTwo">
              <i class="fas fa-fw fa-cog"></i>
+             <span>Catalog</span>
+         </a>
+         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+              
+                 <a class="collapse-item" href="{{ route('catalog.category.index') }}">Category</a>
+                 <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products</a>
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+             aria-expanded="true" aria-controls="collapseTwo">
+             <i class="fas fa-fw fa-cog"></i>
              <span>Categories</span>
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('category.create') }}">Create</a>
-                 <a class="collapse-item" href="{{ route('category.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('catalog.category.create') }}">Create</a>
+                 <a class="collapse-item" href="{{ route('catalog.category.index') }}">List</a>
              </div>
          </div>
      </li>
@@ -52,8 +66,8 @@
          <div id="collapseProducts" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('product.create') }}">Create</a>
-                 <a class="collapse-item" href="{{ route('product.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('catalog.product.create') }}">Create</a>
+                 <a class="collapse-item" href="{{ route('catalog.product.index') }}">List</a>
              </div>
          </div>
      </li>

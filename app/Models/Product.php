@@ -34,6 +34,7 @@ class Product extends Model
         'quantity',
         'alert_quantity',
         'availibility',
+        'product_sku',
         'product_status',
         'product_type',
         'short_description',
