@@ -7,8 +7,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Product List</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     </div>
 
     <!-- Content Row -->
@@ -20,51 +20,13 @@
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Product list</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <a href="{{ route('catalog.product.create') }}"
+                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Create Products</a>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <!-- <form action="{{ route('category.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="categoryName" class="small">Parents Category</label>
-                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
-                                <option value="">Select parent Category</option>
-                                @forelse($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @empty
-                                <option value="">Parent Category Not available!!!</option>
-                                @endforelse()
 
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="categoryName" class="small">Category Name</label>
-                            <input type="text" class="form-control form-control-sm" id="categoryName" name="categoryName" placeholder="Enter Category Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="status" class="small">Status</label>
-                            <select name="status" id="status" class="form-control form-control-sm">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
-                    </form> -->
 
                     <table id="productsAjaxTable" class="display" style="width:100%">
                         <thead>
@@ -91,19 +53,17 @@
 <script>
     $(document).ready(function() {
 
-
         new DataTable('#productsAjaxTable', {
             responsive: true,
             ajax: {
-                url: "{{ url('product/agaxList') }}",
+                url: "{{ url('catalog/product/agaxList') }}",
                 data: function(d) {
                     // Custom parameters can be added here if needed
                     // Example:
                     // d.filter = $('#filter-input').val();
                 }
             },
-            columns: [
-                {
+            columns: [{
                     data: 'images'
                 },
                 {
@@ -120,7 +80,7 @@
                 {
                     data: 'status'
                 },
-                
+
                 {
                     data: 'action',
 

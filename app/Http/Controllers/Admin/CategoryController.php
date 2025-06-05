@@ -119,12 +119,12 @@ class CategoryController extends Controller
             $i = 1;
             foreach ($categories as $category) {
                 $change_credential = NULL;
-                $edit_btn = '<a href="' . route("category.edit", [$category->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+                $edit_btn = '<a href="' . route("catalog.category.edit", [$category->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 						<i class="fas fa-edit"></i> 
 					  </a>';
 
                 //if(Auth::user()->isAbleTo('change-user-credential')){
-                $change_credential = '<a href="' . route("category.destroy", [$category->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
+                $change_credential = '<a href="' . route("catalog.category.destroy", [$category->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
 						<i class="fas fa-trash"></i> 
 					  </a>';
                 //}

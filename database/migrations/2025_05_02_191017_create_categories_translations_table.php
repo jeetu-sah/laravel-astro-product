@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,14 @@ return new class extends Migration
         Schema::create('categories_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            // $table->unsignedBigInteger('category_id');
+            // $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')
+            //     ->onDelete('cascade');
+            $table->foreignIdFor(Category::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
 
 
             $table->string('locale')->index();
@@ -28,14 +35,6 @@ return new class extends Migration
 
 
             $table->timestamps();
-        });
-
-
-        Schema::table('categories', function (Blueprint $table) {
-            //drop the column from category table
-            $table->dropIfExists('name');
-            $table->dropIfExists('short_description');
-            $table->dropIfExists('description');
         });
     }
 
