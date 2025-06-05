@@ -96,14 +96,15 @@
             </div>
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardProductImage" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardProductImage">
+                <a href="#collapseCardProductImage" class="d-block card-header py-3" 
+                    data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardProductImage">
                     <h6 class="m-0 font-weight-bold text-primary">Product Images</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardProductImage">
                     <div class="card-body">
                         <div class="col-lg-12">
-                            <a href='{{ url("product/$product->id/upload-image") }}'
+                            <a href='{{ url("catalog/product/$product->id/upload-image") }}'
                                 class="d-none d-sm-inline-block btn btn-md btn-success shadow-sm">
                                 <i class="fas fa-images"></i> Upload Images</a>
                             <div class="row mt-3">

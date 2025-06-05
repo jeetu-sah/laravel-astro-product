@@ -62,7 +62,7 @@ class ProductController extends Controller
             'quantity'      => $request->quantity,
             'alert_quantity'    => $request->alertQuantity,
             'availibility'      => $request->availableStatus,
-            'availibility'      => $request->product_sku,
+            'product_sku'      => $request->product_sku,
             'product_status'    => $request->productStatus,
             'product_type'      => $request->productType,
             'short_description' => null,
@@ -158,25 +158,25 @@ class ProductController extends Controller
         if ($products->count() > 0) {
             $i = 1;
             foreach ($products as $product) {
-                
+
                 $change_credential = NULL;
-                $edit_btn = '<a href="' . route("product.edit", [$product->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+                $edit_btn = '<a href="' . route("catalog.product.edit", [$product->id]) . '" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 						<i class="fas fa-edit"></i> 
 					  </a>';
 
                 //if(Auth::user()->isAbleTo('change-user-credential')){
-                $change_credential = '<a href="' . route("category.destroy", [$product->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
+                $change_credential = '<a href="' . route("catalog.category.destroy", [$product->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
 						<i class="fas fa-trash"></i> 
 					  </a>';
                 //}
                 $row = [];
-                $row['product_code'] = '<a href="' . route("product.edit", [$product->id]) . '">' . $product->product_code . '</a>';;
+                $row['product_code'] = '<a href="' . route("catalog.product.edit", [$product->id]) . '">' . $product->product_code . '</a>';;
 
                 $row['name'] = $product->product_name;
                 $row['product_sku'] = $product->product_sku;
 
 
-                $row['images'] = '<img src="'.$product->productFirstImagePath.'" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">' ;
+                $row['images'] = '<img src="' . $product->productFirstImagePath . '" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">';
                 $row['status'] = $product->product_status;
 
                 $row['action'] = $edit_btn . " " . $change_credential;

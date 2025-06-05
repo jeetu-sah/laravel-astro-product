@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ImageGalleryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AttributeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +29,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('product/{productId}/delete-image/{productImageId}', [ProductController::class, 'removeImage']);
         Route::match(['get', 'post'], 'product/{productId}/upload-image', [ProductController::class, 'uploadImage']);
         Route::resource('product', ProductController::class);
+    });
+
+    Route::group(['prefix' => 'attribute', 'as' => 'attribute.'], function () {
+        // Category Route start
+        Route::resource('/', AttributeController::class);
     });
 
     Route::resource('image-gallery', ImageGalleryController::class);

@@ -26,7 +26,14 @@
      <div class="sidebar-heading">
          Interface
      </div>
-
+     <!-- Nav Item - Manage Attribute -->
+     <li class="nav-item">
+         <a class="nav-link" href="{{ url('attribute') }}">
+             <i class="fas fa-fw fa-tags"></i>
+             <span>Manage Attribute</span>
+         </a>
+     </li>
+     <!-- End Manage Attribute -->
      <!-- Nav Item - Categories Collapse Menu -->
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -36,29 +43,13 @@
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-              
+
                  <a class="collapse-item" href="{{ route('catalog.category.index') }}">Category</a>
                  <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products</a>
              </div>
          </div>
      </li>
-    
 
-     <!-- Nav Item - Products Collapse Menu -->
-     <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
-             aria-expanded="true">
-             <i class="fas fa-fw fa-cog"></i>
-             <span>Products</span>
-         </a>
-         <div id="collapseProducts" class="collapse" aria-labelledby="headingUtilities"
-             data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('catalog.product.create') }}">Create</a>
-                 <a class="collapse-item" href="{{ route('catalog.product.index') }}">List</a>
-             </div>
-         </div>
-     </li>
 
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
