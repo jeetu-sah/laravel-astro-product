@@ -46,7 +46,7 @@
 
                  <a class="collapse-item" href="{{ route('catalog.category.index') }}">Category</a>
                  <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products</a>
-                 <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products Variants</a>
+                 
              </div>
          </div>
      </li>

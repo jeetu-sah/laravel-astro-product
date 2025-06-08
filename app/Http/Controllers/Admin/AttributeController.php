@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class AttributeController extends Controller
@@ -26,6 +27,7 @@ class AttributeController extends Controller
     {
         $data['title'] = 'Create Attribute';
         $data['categories'] = Attribute::all();
+        $data['fieldTypes'] = DB::table('field_types')->get();
         return view('attribute.create', $data);
     }
 

@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\ProductVariant;
 
-
-class Product extends Model
+class Product extends Model implements TranslatableContract
 {
-
+    use Translatable;
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -26,15 +30,27 @@ class Product extends Model
     protected $fillable = [
         'id',
         'category_id',
-        'slug_name',
         'product_code',
         'basic_price',
+        'product_status',
         'product_type',
         'user_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public $translatedAttributes = [
+        'product_name',
+        'slug_name',
+        'short_description',
+        'description',
+        'seo_keyword',
+        'meta_keyword',
+        'meta_description'
+    ];
+
+    protected $translationForeignKey = 'product_id';
 
 
     public function images(): BelongsToMany
@@ -54,5 +70,10 @@ class Product extends Model
         return Attribute::make(
             get: fn() => ($this->productFirstImageUrl) ? asset('storage/app/private/' . $this->productFirstImageUrl) : null,
         );
+    }
+
+    public function varients(): HasMany
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id');
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('type', 10); // text, dropdown, boolean, etc.
             $table->boolean('is_filterable')->default(false);
             $table->boolean('is_required')->default(false);
+            $table->boolean('is_variation')->default(false);
             $table->string('status', 10)->default('active');
             $table->timestamps();
         });

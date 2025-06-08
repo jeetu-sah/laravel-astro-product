@@ -28,24 +28,14 @@
                 <div class="card-body">
                     <form action="{{ route('catalog.product.store') }}" method="POST">
                         @csrf
-                        <!-- <div class="form-group">
-                            <label for="categoryName" class="small">Select Product Category</label>
-                            <select name="parentCategory" id="parentCategory" class="form-control form-control-sm">
-                                <option value="">Select parent Category</option>
-                                @forelse($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @empty
-                                <option value="">Parent Category Not available!!!</option>
-                                @endforelse()
-
-                            </select>
-                        </div> -->
                         <div class="form-group">
                             <label for="parentCategory" class="small">Select Product Category</label>
                             <select name="parentCategory" id="parentCategory" class="form-control form-control-sm select2">
                                 <option value="">Select parent Category</option>
                                 @forelse($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ old('parentCategory') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                                 @empty
                                 <option value="">Parent Category Not available!!!</option>
                                 @endforelse
@@ -61,69 +51,54 @@
                                 placeholder="Enter Product Name" />
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6 mb-2">
                                 <label for="productCode" class="small">Product Code</label>
                                 <input type="text" value="DemoTest" class="form-control form-control-sm" id="productCode" name="productCode" placeholder="Enter Product Code" />
                             </div>
-                            <div class="col-sm-4">
-                                <label for="price" class="small">Price</label>
-                                <input type="number" class="form-control form-control-sm" id="price" name="price" placeholder="Price" value="10" />
+                            <div class="col-sm-6 mb-2">
+                                <label for="productCode" class="small">Product Basic price</label>
+                                <input type="text" value="{{ old('basic_price') }}" class="form-control form-control-sm" id="basic_price" name="basic_price" placeholder="Product Basic price" />
                             </div>
-                            <div class="col-sm-4">
-                                <label for="sellingPrice" class="small">Selling Price</label>
-                                <input type="number" class="form-control form-control-sm" id="price" name="sellingPrice" placeholder="Selling Price" value="8" />
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <label for="quantity" class="small">Quantity</label>
-                                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" placeholder="Enter Product Quantity" value="100" />
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="alertQuantity" class="small">Alert Quantity</label>
-                                <input type="number" class="form-control form-control-sm" id="alertQuantity" name="alertQuantity" placeholder="Enter Alert Quantity" value="10" />
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="productType" class="small">Product Type</label>
                                 <select name="productType" id="productType" class="form-control form-control-sm">
                                     <option value="simple-product">Simple Product</option>
                                     <option value="group-product">Group Product</option>
                                 </select>
                             </div>
-
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="productStatus" class="small">Status</label>
                                 <select name="productStatus" id="productStatus" class="form-control form-control-sm">
                                     <option value="draft">Draft</option>
                                     <option value="in-live">In Live</option>
                                 </select>
                             </div>
-                            <div class="col-sm-4">
-                                <label for="availableStatus" class="small">Available Status</label>
-                                <select name="availableStatus" id="availableStatus" class="form-control form-control-sm">
-                                    <option value="available">Available</option>
-                                    <option value="out-of-stock">Out Of Stock</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="availableStatus" class="small">Product SKU</label>
-                                <input type="text" class="form-control form-control-sm" id="product_sku" name="product_sku" placeholder="Enter Alert Quantity" value="PRODUCTSKU" />
-
-                            </div>
-
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <label for="editor" class="small">Description <span class="text-danger">*</span></label>
+                                <label for="editor" class="small">SEO Keyword</label>
+                                <textarea id="seo_keyword" name="seo_keyword" class="form-control form-control-sm" placeholder="SEO Keyword"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="editor" class="small">Short Description</label>
+                                <div id="shortDescriptionProductEditor" style="height: 200px;"></div>
+                                <div style="display:none;">
+                                    <input type="text" name="shortDescriptionProduct" id="shortDescriptionProduct" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="editor" class="small">Description</label>
                                 <div id="descriptionProductEditor" style="height: 200px;"></div>
                                 <div style="display:none;">
                                     <input type="text" name="descriptionProduct" id="descriptionProduct" />
                                 </div>
                             </div>
                         </div>
+
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -136,12 +111,25 @@
 @endsection()
 @section('script')
 <script>
-    const quillProduct = new Quill('#descriptionProductEditor', {
+    const shortDescriptionQuillProduct = new Quill('#shortDescriptionProductEditor', {
         theme: 'snow'
     });
+
+
     $(document).on('blur', '#descriptionProductEditor', function(e) {
         e.preventDefault();
-        $('#descriptionProduct').val(quillProduct.root.innerHTML);
+        $('#shortDescriptionProduct').val(shortDescriptionQuillProduct.root.innerHTML);
+    });
+
+
+
+    const descriptionProduct = new Quill('#descriptionProductEditor', {
+        theme: 'snow'
+    });
+
+    $(document).on('blur', '#descriptionProductEditor', function(e) {
+        e.preventDefault();
+        $('#descriptionProduct').val(descriptionProduct.root.innerHTML);
     });
 </script>
 @endsection

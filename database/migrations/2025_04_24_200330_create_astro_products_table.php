@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('product_code', 20)->nullable();
             $table->decimal('basic_price', 8, 2)->default(0);
             $table->string('product_type', 20);
+            $table->string('product_status', 10)->default('draft');
   
 
             $table->foreignIdFor(User::class)->nullable();

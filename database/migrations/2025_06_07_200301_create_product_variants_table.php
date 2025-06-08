@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->nullable();
             $table->integer('stock')->default(0);
             $table->integer('alert_quantity')->default(0);
+            $table->string('product_variants_status',10)->default('active');
             $table->char('status', 15)->default(0);
 
             $table->timestamps();

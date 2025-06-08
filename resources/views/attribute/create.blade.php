@@ -30,14 +30,14 @@
                         @csrf
 
                         <div class="form-group row">
-                              <div class="col-sm-6">
-                                  <label for="attribute_name" class="small">Name</label>
-                                  <input type="text" class="form-control form-control-sm" id="attribute_name" name="attribute_name" placeholder="Enter Attribute Name" />
-                              </div>
-                              <div class="col-sm-6">
-                                  <label for="attribute_code" class="small">Code</label>
-                                  <input type="text" class="form-control form-control-sm" id="attribute_code" name="attribute_code" placeholder="Enter Attribute Code" />
-                              </div>
+                            <div class="col-sm-6">
+                                <label for="attribute_name" class="small">Name</label>
+                                <input type="text" class="form-control form-control-sm" id="attribute_name" name="attribute_name" placeholder="Enter Attribute Name" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="attribute_code" class="small">Code</label>
+                                <input type="text" class="form-control form-control-sm" id="attribute_code" name="attribute_code" placeholder="Enter Attribute Code" />
+                            </div>
                         </div>
 
                         <div class="form-group row mt-2">
@@ -67,9 +67,11 @@
                             <div class="col-sm-4">
                                 <label for="type" class="small">Type</label>
                                 <select name="type" id="type" class="form-control form-control-sm">
-                                    <option value="dropdown">Dropdown</option>
-                                    <option value="checkbox">Checkbox</option>
-                                    <option value="text">Text</option>
+                                    @forelse($fieldTypes as $fieldType)
+                                    <option value="{{ $fieldType->code }}">{{$fieldType->label}}</option>
+                                    @empty
+                                    <option disabled>No record found</option>
+                                    @endforelse
                                 </select>
                             </div>
                         </div>

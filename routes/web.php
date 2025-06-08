@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         //products varient start
         Route::group(['prefix' => '{productId}/product-varient', 'as' => 'product-varient.'], function () {
+            Route::get('/agaxList', [ProductVarientController::class, 'list'])->name('agaxList');
             Route::resource('', ProductVarientController::class);
         });
     });

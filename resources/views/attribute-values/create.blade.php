@@ -22,7 +22,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Create Attribute Value For {{$attribute->name ?? '--'}}</h6>
                     <a href="{{ route('attributes.index') }}"
                         class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        <i class="fas fa-list fa-sm text-white-50"></i> List Categories</a>
+                        <i class="fas fa-list fa-sm text-white-50"></i> List Attributes</a>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">

@@ -16,6 +16,7 @@ Run the below command on the terminal, in the root directory
 - php artisan db:seed --class=AdminSeeder
 - php artisan key:generate
 - php artisan storage:link
+- php artisan db:seed --class=FieldTypesSeeder
 
 
 ## Run the Project 

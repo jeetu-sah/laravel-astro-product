@@ -26,13 +26,13 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <table id="productsAjaxTable" class="display" style="width:100%">
+                    <table id="productsVarientsAjaxTable" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Image</th>
-                                <th>Products No.</th>
-                                <th>Products SKU</th>
-                                <th>Name</th>
+                                <th>Product SKU</th>
+                                <th>Price</th>
+                                <th>Stock</th>
                                 <th>Status</th>
                                 <th>Action Btns</th>
                             </tr>
@@ -50,11 +50,15 @@
 @section('script')
 <script>
     $(document).ready(function() {
+        let varientListUrl = "{{ route('catalog.product-varient.agaxList',['productId' => ':productId']) }}";
+        let productId = "{{$product->id}}";
+        const varientListRoutes = varientListUrl.replace(':productId', productId)
+        console.log('varientListUrl', varientListRoutes)
 
-        new DataTable('#productsAjaxTable', {
+        new DataTable('#productsVarientsAjaxTable', {
             responsive: true,
             ajax: {
-                url: "{{ url('catalog/product/agaxList') }}",
+                url: varientListRoutes,
                 data: function(d) {
                     // Custom parameters can be added here if needed
                     // Example:
@@ -65,14 +69,14 @@
                     data: 'images'
                 },
                 {
-                    data: 'product_code'
+                    data: 'product_sku'
                 },
                 {
-                    data: 'product_sku'
+                    data: 'price'
                 },
 
                 {
-                    data: 'name'
+                    data: 'stock'
                 },
 
                 {

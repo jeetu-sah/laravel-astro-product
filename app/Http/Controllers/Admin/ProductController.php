@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ImageGallery;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -36,43 +39,53 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $slug = Str::slug($request->productName, '-');
         $validatedData = $request->validate([
             'parentCategory' => 'required',
             'productName' => 'required',
             'productCode' => 'required',
-            'price' => 'required',
-            'sellingPrice' => 'required',
-            'quantity' => 'required',
-            'alertQuantity' => 'required',
+            'basic_price' => 'required',
             'productType' => 'required',
             'productStatus' => 'required',
-            'availableStatus' => 'required',
         ]);
 
-        $slug = Str::slug($request->productName, '-');
-        $slugExists = Product::where('slug_name', '=', $slug)->exists();
+        DB::beginTransaction();
+        try {
+            // Prepare insert data
+            $insertRecord = [
+                'category_id'     => $request->parentCategory ?? 0,
+                'product_code'    => $request->productCode,
+                'basic_price'     => $request->basic_price,
+                'product_status'  => $request->productStatus,
+                'product_type'    => $request->productType,
+                'user_id'         => Auth::id(),
+                'translations' => [
+                    'en' => [
+                        'product_name'       => $request->productName,
+                        'slug_name'          => $slug,
+                        'short_description'  => $request->shortDescriptionProduct,
+                        'description'        => $request->descriptionProduct,
+                        'seo_keyword'        => $request->seo_keyword,
+                        'meta_keyword'       => null,
+                        'meta_description'   => null,
+                    ]
+                ]
+            ];
 
-        $productResult = Product::create([
-            'category_id'   => $request->parentCategory,
-            'product_name'  => $request->productName,
-            'slug_name'     => ($slugExists) ? $slug . '-' . Str::random(10) : $slug,
-            'product_code'  => $request->productCode,
-            'price'         => $request->price,
-            'selling_price' => $request->sellingPrice,
-            'quantity'      => $request->quantity,
-            'alert_quantity'    => $request->alertQuantity,
-            'availibility'      => $request->availableStatus,
-            'product_sku'      => $request->product_sku,
-            'product_status'    => $request->productStatus,
-            'product_type'      => $request->productType,
-            'short_description' => null,
-            'description'       => $request->descriptionProduct,
-        ]);
+            // Insert main product with translations (assuming translatable or manual logic)
+            $productResult = Product::create($insertRecord);
 
-        if ($productResult) {
-            return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong>  Record Insert Successfully !!! </div>"]);
-        } else {
-            return redirect()->back()->with(["msg" => "<div class='bg-danger text-black'><strong>Wrong </strong>  Something went wrong, please try again !!! </div>"]);
+            DB::commit();
+
+            return redirect()->back()->with([
+                'msg' => "<div class='alert alert-success'><strong>Success </strong> Record Inserted Successfully!</div>"
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect()->back()->with([
+                'msg' => "<div class='alert alert-danger'><strong>Error </strong> Something went wrong: {$e->getMessage()}</div>"
+            ]);
         }
     }
 
