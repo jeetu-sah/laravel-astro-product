@@ -28,7 +28,7 @@
      </div>
      <!-- Nav Item - Manage Attribute -->
      <li class="nav-item">
-         <a class="nav-link" href="{{ url('attribute') }}">
+         <a class="nav-link" href="{{ route('attributes.index') }}">
              <i class="fas fa-fw fa-tags"></i>
              <span>Manage Attribute</span>
          </a>
@@ -46,6 +46,7 @@
 
                  <a class="collapse-item" href="{{ route('catalog.category.index') }}">Category</a>
                  <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products</a>
+                 <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products Variants</a>
              </div>
          </div>
      </li>

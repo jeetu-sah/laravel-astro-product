@@ -6,6 +6,9 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ImageGalleryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\AttributeValueController;
+use App\Http\Controllers\Admin\ProductVarientController;
+use App\Models\AttributeValue;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,11 +32,23 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('product/{productId}/delete-image/{productImageId}', [ProductController::class, 'removeImage']);
         Route::match(['get', 'post'], 'product/{productId}/upload-image', [ProductController::class, 'uploadImage']);
         Route::resource('product', ProductController::class);
+
+        //products varient start
+        Route::group(['prefix' => '{productId}/product-varient', 'as' => 'product-varient.'], function () {
+            Route::resource('', ProductVarientController::class);
+        });
     });
 
-    Route::group(['prefix' => 'attribute', 'as' => 'attribute.'], function () {
-        // Category Route start
+    Route::group(['prefix' => 'attributes', 'as' => 'attributes.'], function () {
+        // Attributes Route start
+        Route::get('/{id}/edit', [AttributeController::class, 'edit']);
         Route::resource('/', AttributeController::class);
+        Route::get('/ajaxlist', [AttributeController::class, 'list']);
+
+
+        Route::group(['prefix' => '/{attributeId}/attributes-values', 'as' => 'attributes-values.'], function () {
+            Route::resource('', AttributeValueController::class);
+        });
     });
 
     Route::resource('image-gallery', ImageGalleryController::class);

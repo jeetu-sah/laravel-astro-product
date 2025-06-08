@@ -11,7 +11,7 @@ class AttributeValue extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
-    protected $fillable = ['attribute_id', 'value', 'sort_order'];
+    protected $fillable = ['attribute_id', 'value', 'sort_order', 'slug'];
 
     public $translatedAttributes = ['name'];
 

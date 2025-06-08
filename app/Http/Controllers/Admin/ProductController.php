@@ -170,9 +170,9 @@ class ProductController extends Controller
 					  </a>';
                 //}
                 $row = [];
-                $row['product_code'] = '<a href="' . route("catalog.product.edit", [$product->id]) . '">' . $product->product_code . '</a>';;
+                $row['product_code'] = '<a href="' . route("catalog.product.edit", [$product->id]) . '">' . $product->product_code . '</a>';
 
-                $row['name'] = $product->product_name;
+                $row['name'] = '<a href="' . route("catalog.product-varient.index", ['productId' => $product->id]) . '">' . $product->product_name . '</a>';;
                 $row['product_sku'] = $product->product_sku;
 
 

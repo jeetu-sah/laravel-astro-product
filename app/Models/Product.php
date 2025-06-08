@@ -16,7 +16,7 @@ class Product extends Model
      *
      * @var string
      */
-    protected $table = 'astro_products';
+    protected $table = 'products';
 
     /**
      * The attributes that are mass assignable.
@@ -26,19 +26,14 @@ class Product extends Model
     protected $fillable = [
         'id',
         'category_id',
-        'product_name',
         'slug_name',
         'product_code',
-        'price',
-        'selling_price',
-        'quantity',
-        'alert_quantity',
-        'availibility',
-        'product_sku',
-        'product_status',
+        'basic_price',
         'product_type',
-        'short_description',
-        'description',
+        'user_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
 

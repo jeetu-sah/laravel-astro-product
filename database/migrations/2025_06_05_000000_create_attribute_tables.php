@@ -11,10 +11,11 @@ return new class extends Migration {
         // Attributes table
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('type'); // text, dropdown, boolean, etc.
+            $table->string('code', 20)->unique();
+            $table->string('type', 10); // text, dropdown, boolean, etc.
             $table->boolean('is_filterable')->default(false);
             $table->boolean('is_required')->default(false);
+            $table->string('status', 10)->default('active');
             $table->timestamps();
         });
 
@@ -22,8 +23,9 @@ return new class extends Migration {
         Schema::create('attribute_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_id')->constrained()->onDelete('cascade');
-            $table->string('locale')->index();
-            $table->string('name');
+            $table->string('locale', 10)->index();
+            $table->string('name', 30);
+            $table->text('description')->nullable();
             $table->unique(['attribute_id', 'locale']);
         });
 
@@ -31,8 +33,9 @@ return new class extends Migration {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_id')->constrained()->onDelete('cascade');
-            $table->string('value');
+            $table->string('value', 20);
             $table->integer('sort_order')->nullable();
+            $table->string('slug', 20)->nullable();
             $table->timestamps();
         });
 
@@ -40,8 +43,8 @@ return new class extends Migration {
         Schema::create('attribute_value_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_value_id')->constrained()->onDelete('cascade');
-            $table->string('locale')->index();
-            $table->string('name');
+            $table->string('locale', 10)->index();
+            $table->string('name', 20);
             $table->unique(['attribute_value_id', 'locale']);
         });
     }
