@@ -134,7 +134,6 @@ class ProductController extends Controller
         }
 
         if ($request->isMethod('post')) {
-
             if (count($request->images) > 0) {
                 $data['product']->images()->attach($request->images);
 
@@ -190,7 +189,7 @@ class ProductController extends Controller
 
 
                 $row['images'] = '<img src="' . $product->productFirstImagePath . '" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">';
-                $row['status'] = $product->product_status;
+                $row['status'] = '<span class="badge badge-danger">' . $product->product_status . '</span>';
 
                 $row['action'] = $edit_btn . " " . $change_credential;
 

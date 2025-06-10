@@ -33,7 +33,6 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Products No.</th>
-                                <th>Products SKU</th>
                                 <th>Name</th>
                                 <th>Status</th>
                                 <th>Action Btns</th>
@@ -69,10 +68,6 @@
                 {
                     data: 'product_code'
                 },
-                {
-                    data: 'product_sku'
-                },
-
                 {
                     data: 'name'
                 },

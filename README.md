@@ -17,6 +17,7 @@ Run the below command on the terminal, in the root directory
 - php artisan key:generate
 - php artisan storage:link
 - php artisan db:seed --class=FieldTypesSeeder
+- php artisan db:seed --class=ProductTypeSeeder
 
 
 ## Run the Project 
