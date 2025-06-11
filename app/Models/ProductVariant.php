@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\ProductVariantValue;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class ProductVariant extends Model
@@ -36,5 +37,11 @@ class ProductVariant extends Model
     public function varientAttributes(): HasMany
     {
         return $this->hasMany(ProductVariantValue::class, 'product_variant_id');
+    }
+
+
+    public function images(): BelongsToMany
+    {
+        return $this->belongsToMany(ImageGallery::class, 'product_images', 'product_variant_id', 'image_id')->withPivot('id');
     }
 }

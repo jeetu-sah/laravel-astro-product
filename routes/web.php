@@ -52,5 +52,15 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
-    Route::resource('image-gallery', ImageGalleryController::class);
+    Route::group(['prefix' => 'image-gallery', 'as' => 'image-gallery.'], function () {
+        // Attributes Route start
+        // Route::get('/', [AttributeController::class, 'edit']);
+        Route::resource('', ImageGalleryController::class);
+        Route::get('/map-images', [ImageGalleryController::class, 'mapImages'])->name('map-images');
+        Route::get('/mapped-images-to', [ImageGalleryController::class, 'mappedImagesTo'])->name('mapped-images-to');
+
+        Route::post('/{id}/upload-image', [ProductVarientController::class, 'uploadImage'])->name('product-varient.upload-image');
+    });
+
+    // Route::resource('image-gallery', ImageGalleryController::class);
 });

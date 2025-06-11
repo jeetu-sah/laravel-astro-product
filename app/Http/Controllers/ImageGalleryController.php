@@ -100,4 +100,24 @@ class ImageGalleryController extends Controller
             return redirect()->back()->with(["msg" => "<div class='bg-danger text-white'><strong>Warning </strong> Something went wrong, please try again  !!! </div>"]);
         }
     }
+
+    public function mapImages(Request $request)
+    {
+        $data['title'] = 'Map Images';
+        $data['images'] = ImageGallery::take(12)->orderByDesc('id')->get();
+        $imageFor = $request->query('image-for');
+        $id = $request->query('id');
+        $data['details'] = ImageGallery::mapdetails($imageFor, $id);
+        // echo "<pre>";
+        // print_r($data['details']);exit;
+        return view('imageGallery.map-images', $data);
+    }
+
+    public function mappedImagesTo(Request $request)
+    {
+        echo "<pre>";
+        print_r($request->all());
+        exit;
+
+    }
 }

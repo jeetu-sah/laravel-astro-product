@@ -33,4 +33,43 @@ class ImageGallery extends Model
         'created_at',
         'updated_at'
     ];
+
+    const UPLOAD_PRODUCT_VARIENT = 'product_variants';
+    const UPLOAD_PRODUCT = 'product';
+
+
+    public static function mapdetails($imageFor, $id)
+    {
+        switch ($imageFor) {
+            case 'product':
+                // logic for product
+                return [
+                    'id' => $id,
+                    'imageFor' => 'App\Models\Product',
+                    'model' => 'App\Models\Product',
+                    'upload_route' => route('catalog.product-varient.upload-image', ['id' => $id]),
+                ];
+                break;
+
+            case 'product_variants':
+                // logic for category
+                
+                return [
+                    'id' => $id,
+                    'imageFor' => 'App\Models\ProductVariant',
+                    'model' => 'App\Models\ProductVariant',
+                    'upload_route' => route('image-gallery.product-varient.upload-image', ['id' => $id]),
+                ];
+                break;
+
+            case 'brand':
+                // logic for brand
+                echo "Image is for a brand. ID: $id";
+                break;
+
+            default:
+                echo "Unknown imageFor type: $imageFor. ID: $id";
+                break;
+        }
+    }
 }

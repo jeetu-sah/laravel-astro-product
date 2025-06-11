@@ -63,6 +63,7 @@
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
                  <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
+              
              </div>
          </div>
      </li>

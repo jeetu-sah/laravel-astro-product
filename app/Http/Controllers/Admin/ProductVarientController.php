@@ -11,6 +11,7 @@ use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\ImageGallery;
 
 
 class ProductVarientController extends Controller
@@ -167,6 +168,9 @@ class ProductVarientController extends Controller
                 $change_credential = '<a href="' . route("catalog.category.destroy", [$productVarient->id]) . '"  data-toggle="modal"  data-toggle="tooltip" title="Edit Record" class="btn btn-danger deleteCategory" style="margin-right: 5px;">
 						<i class="fas fa-trash"></i> 
 					  </a>';
+                $uploadImage = '<a href="' . route("image-gallery.map-images", ['image-for' => 'product_variants', 'id' => $productVarient->id]) . '"  title="Upload Image" class="btn btn-warning" style="margin-right: 5px;">
+						<i class="fas fa-images"></i> 
+					  </a>';
 
                 $row = [];
                 $row['price'] = $productVarient->price;
@@ -178,7 +182,7 @@ class ProductVarientController extends Controller
                 $row['images'] = '<img src="' . $productVarient->productFirstImagePath . '" alt="Smiley face" width="42" height="42" style="vertical-align:bottom">';
                 $row['status'] = $productVarient->product_variants_status;
 
-                $row['action'] = $edit_btn . " " . $change_credential;
+                $row['action'] = $edit_btn . " " . $change_credential . " " . $uploadImage;
 
                 $rows[] = $row;
             }
@@ -193,5 +197,22 @@ class ProductVarientController extends Controller
 
         return json_encode($json_data);
         exit;
+    }
+
+
+    public function  uploadImage(Request $request, $id)
+    {
+        $productVarient = ProductVariant::find($id);
+        if ($productVarient) {
+            if (count($request->images) > 0) {
+                $productVarient->images()->attach($request->images);
+
+                return redirect()->back()->with(["msg" => "<div class='alert alert-success'><strong>Success </strong> Images save successfully !!! </div>"]);
+            } else {
+                return redirect()->back()->with(["msg" => "<div class='alert alert-danger'><strong>Warning </strong> Please select at least one photo !!! </div>"]);
+            }
+        } else {
+             return redirect()->back()->with(["msg" => "<div class='alert alert-danger'><strong>Warning </strong> Please select at least one photo !!! </div>"]);
+        }
     }
 }
