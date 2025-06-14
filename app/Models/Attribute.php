@@ -12,10 +12,10 @@ class Attribute extends Model implements TranslatableContract
     use HasFactory, Translatable;
 
     protected $fillable = [
-        'code', 'type','slug_name', 'is_filterable', 'is_required', 'status'
+        'code', 'type', 'is_filterable', 'is_required', 'status'
     ];
 
-    public $translatedAttributes = ['name', 'description'];
+    public $translatedAttributes = ['name', 'description', 'slug_name'];
 
     public function values()
     {

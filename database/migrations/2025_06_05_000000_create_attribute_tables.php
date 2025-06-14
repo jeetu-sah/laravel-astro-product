@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->foreignId('attribute_id')->constrained()->onDelete('cascade');
             $table->string('locale', 10)->index();
             $table->string('name', 30);
+            $table->string('slug_name', 30);
             $table->text('description')->nullable();
             $table->unique(['attribute_id', 'locale']);
         });

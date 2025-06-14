@@ -16,12 +16,10 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Category::class);
-            $table->string('slug_name');
             $table->string('product_code', 20)->nullable();
             $table->decimal('basic_price', 8, 2)->default(0);
             $table->string('product_type', 20);
             $table->string('product_status', 10)->default('draft');
-  
 
             $table->foreignIdFor(User::class)->nullable();
 

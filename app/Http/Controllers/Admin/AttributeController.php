@@ -43,7 +43,6 @@ class AttributeController extends Controller
 
         $insertRecord = [
             'code' => $request->attribute_code,
-            'slug_name' => Str::slug($request->attribute_name, '-'),
             'status' => $request->status,
             'is_required' => ($request->is_required == 'yes') ? true : false,
             'is_filterable' => ($request->is_filterable == 'yes') ? true : false,
@@ -51,17 +50,27 @@ class AttributeController extends Controller
             'translations' => [
                 'en' => [
                     'name' => $request->attribute_name,
+                    'slug_name' => Str::slug($request->attribute_name, '-'),
                     'description' => $request->description,
                 ]
             ]
         ];
 
-        $result = Attribute::create($insertRecord);
+        DB::beginTransaction();
+        try {
+            $result = Attribute::create($insertRecord);
+            DB::commit();
+            if ($result) {
+                return redirect()->back()->with(["msg" => "<div class='alert alert-success'><strong>Success </strong>  Record Insert Successfully !!! </div>"]);
+            } else {
+                return redirect()->back()->with(["msg" => "<div class='alert alert-danger'><strong>Wrong </strong>  Something went wrong, please try again !!! </div>"]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
 
-        if ($result) {
-            return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong>  Record Insert Successfully !!! </div>"]);
-        } else {
-            return redirect()->back()->with(["msg" => "<div class='bg-danger text-black'><strong>Wrong </strong>  Something went wrong, please try again !!! </div>"]);
+            return redirect()->back()->with([
+                'msg' => "<div class='alert alert-danger'><strong>Error </strong> Something went wrong: {$e->getMessage()}</div>"
+            ]);
         }
     }
 
@@ -82,7 +91,7 @@ class AttributeController extends Controller
     {
         $data['title'] = 'Edit Attribute';
         $data['attribute'] = Attribute::find($id);
-     
+
         return view('attribute.edit', $data);
     }
 
