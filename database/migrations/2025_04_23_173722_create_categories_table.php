@@ -16,9 +16,6 @@ return new class extends Migration
             $table->id();
             $table->integer('parent_category_id')->nullable();
             $table->string('slug_name');
-            $table->string('name');
-            $table->text('short_description')->nullable();
-            $table->text('description')->nullable();
             $table->char('status', 10)->nullable()->comment('active, inactive');
 
            $table->foreignIdFor(User::class)->nullable();

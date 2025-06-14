@@ -22,18 +22,11 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-
-
             $table->string('locale')->index();
-
             $table->string('name')->nullable();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
-
             $table->unique(['category_id', 'locale']);
-
-
             $table->timestamps();
         });
     }
