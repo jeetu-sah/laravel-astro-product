@@ -27,6 +27,7 @@ class Product extends Model implements TranslatableContract
      *
      * @var list<string>
      */
+    
     protected $fillable = [
         'id',
         'category_id',
@@ -45,7 +46,7 @@ class Product extends Model implements TranslatableContract
         'slug_name',
         'short_description',
         'description',
-        'seo_keyword',
+        'meta_title',
         'meta_keyword',
         'meta_description'
     ];

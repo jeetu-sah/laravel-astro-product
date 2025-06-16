@@ -76,8 +76,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <label for="editor" class="small">SEO Keyword</label>
-                                <textarea id="seo_keyword" name="seo_keyword" class="form-control form-control-sm" placeholder="SEO Keyword"></textarea>
+                                <label for="meta_title" class="small">Meta Title</label>
+                                <input type="text" id="meta_title" name="meta_title" class="form-control form-control-sm" placeholder="Meta Title" />
                             </div>
                         </div>
                         <div class="form-group row">

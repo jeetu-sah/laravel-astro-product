@@ -74,35 +74,52 @@
             </div>
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardProductImage" class="d-block card-header py-3"
-                    data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardProductImage">
+                <a href="#collapseCardProductSeo" class="d-block card-header py-3"
+                    data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardProductSeo">
                     <h6 class="m-0 font-weight-bold text-primary">Product SEO Management</h6>
                 </a>
                 <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseCardProductImage">
+                <div class="collapse show" id="collapseCardProductSeo">
                     <div class="card-body">
                         <div class="col-lg-12">
-                            <a href='{{ url("catalog/product/$product->id/upload-image") }}'
-                                class="d-none d-sm-inline-block btn btn-md btn-success shadow-sm">
-                                <i class="fas fa-images"></i> Upload Images</a>
-                            <div class="row mt-3">
-                                @foreach($productsImages as $image)
-
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <img src="{{ asset('storage/app/private/'.$image->image_url) }}" class="card-img-top img-fluid" alt="..." style="width: 18rem; height: 18rem">
-
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$image->image_name ?? '--'}}</h5>
-                                            <h5 class="card-title">{{$image->alt_name ?? '--'}}</h5>
-
-                                            <input type="hidden" name="_token" value="9MuE1ge6VYQTIwT3qiROdrK2KpZvfZr5U0VUhaiq" autocomplete="off">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <a href='{{ url("product/$product->id/delete-image/$image->id") }}' class="btn btn-danger deleteProductImage"><i class="fas fa-fw fa-trash"></i></a>
-                                        </div>
-                                    </div>
+                            <!-- View Mode -->
+                            <div id="seoView">
+                                <div class="mb-2"><strong>Meta Title:</strong> <span id="seoTitleText">Amazing Product</span></div>
+                                <div class="mb-2"><strong>Meta Keywords:</strong> <span id="seoKeywordsText">fashion, clothing, shirt</span></div>
+                                <div class="mb-2"><strong>Meta Description:</strong>
+                                    <p id="seoDescriptionText">This is a great product for people who love style and comfort.</p>
                                 </div>
-                                @endforeach
+                                <button type="button" class="btn btn-sm btn-primary editSeo" data-tab="form">Edit</button>
+                            </div>
+
+                            <!-- Edit Mode -->
+                            <div id="seoEdit" style="display: none;">
+                                <form action="{{ route('catalog.product.seo', ['id' => $product->id]) }}" method="POST">
+                                    @csrf()
+                                    <div class="mb-3">
+                                        <label for="seoTitle" class="form-label">Meta Title</label>
+                                        <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{$product->meta_title}}" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="seoKeywords" class="form-label">Meta Keywords</label>
+                                        <input type="text" class="form-control"
+                                            id="meta_keywords"
+                                            name="meta_keywords"
+                                            value="{{$product->meta_keyword}}" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="seoDescription" class="form-label">Meta Description</label>
+                                        <textarea class="form-control"
+                                            id="meta_description"
+                                            name="meta_description"
+                                            rows="3">{{$product->meta_description}}</textarea>
+                                    </div>
+
+                                    <button class="btn btn-sm btn-success ajaxSubmit" data-submit="ajaxSubmit" type="submit">Save</button>
+                                    <button type="button" class="btn btn-sm btn-secondary editSeo" data-tab="list">Cancel</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -178,6 +195,18 @@
 @endsection()
 @section('script')
 <script>
+    //edit seo
+    $(document).on('click', '.editSeo', function(e) {
+        e.preventDefault();
+        let type = $(this).data('tab');
+        if (type === 'form') {
+            $('#seoView').hide();
+            $('#seoEdit').show();
+        } else {
+            $('#seoView').show();
+            $('#seoEdit').hide();
+        }
+    });
     //on delete button click.
     $(document).on('click', '.deleteProductImage', function(e) {
         e.preventDefault();
@@ -217,4 +246,5 @@
         });
     });
 </script>
+<script src="{{ asset('public/custom-js/custom-javascript.js') }}" defer></script>
 @endsection

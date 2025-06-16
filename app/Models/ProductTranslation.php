@@ -13,7 +13,7 @@ class ProductTranslation extends Model
         'slug_name',
         'short_description',
         'description',
-        'seo_keyword',
+        'meta_title',
         'meta_keyword',
         'meta_description'
     ];

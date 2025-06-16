@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             // SEO Meta tags (translatable)
-            $table->text('seo_keyword')->nullable();
+            $table->text('meta_title')->nullable();
             $table->text('meta_keyword')->nullable();
             $table->text('meta_description')->nullable();
 

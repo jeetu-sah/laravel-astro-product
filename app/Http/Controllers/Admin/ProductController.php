@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ImageGallery;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -65,8 +66,8 @@ class ProductController extends Controller
                         'slug_name'          => $slug,
                         'short_description'  => $request->shortDescriptionProduct,
                         'description'        => $request->descriptionProduct,
-                        'seo_keyword'        => $request->seo_keyword,
-                        'meta_keyword'       => null,
+                        'meta_title'        => $request->meta_title,
+                        'meta_keyword'       => $request->seo_keyword,
                         'meta_description'   => null,
                     ]
                 ]
@@ -90,6 +91,60 @@ class ProductController extends Controller
     }
 
     /**
+     * Store a product store.
+     */
+    public function storeSeo(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'meta_title'    => 'required|string|max:255',
+            'meta_keywords' => 'required|string|max:255',
+            'meta_description' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            if ($product) {
+                $product->translate('en')->meta_title = $request->meta_title;
+                $product->translate('en')->meta_keyword = $request->meta_keywords;
+                $product->translate('en')->meta_description = $request->meta_description;
+                $product->save();
+
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'toast' => '#successToast',
+                    'type' => 'toggle',
+                    'showtab' => 'seoView',
+                    'hidetab' => 'seoEdit',
+                    'msg' => "Record Inserted Successfully!"
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 500,
+                    'toast' => '#warningToast',
+                    'msg' => "Product does not exists!"
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'status' => 500,
+                'toast' => '#dangerToast',
+                'msg' => "Something went wrong, please try agin!"
+            ]);
+        }
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(Product $product)
@@ -105,8 +160,7 @@ class ProductController extends Controller
         $data['title'] = 'Product Edit';
         $data['product'] = $product;
         $data['productsImages'] = $product->images;
-        // echo "<pre>";
-        // print_r($data['productsImages'][0]->pivot->id);exit;
+
         return view('product.edit', $data);
     }
 

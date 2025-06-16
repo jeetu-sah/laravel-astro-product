@@ -317,6 +317,66 @@
         </div>
     </div>
 
+    <!--Toast modal-->
+    <div style="position: absolute; bottom: 1rem; right: 1rem;">
+        <div class="toast" id="primaryToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-primary text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Primary Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the primary background color utility on the toast header.</div>
+        </div>
+        <div class="toast" id="secondaryToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-secondary text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Secondary Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the secondary background color utility on the toast header.</div>
+        </div>
+        <div class="toast" role="alert" id="successToast" aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-success text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Success Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the success background color utility on the toast header.</div>
+        </div>
+        <div class="toast" role="alert" id="infoToast" aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-info text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Info Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the info background color utility on the toast header.</div>
+        </div>
+        <div class="toast" role="alert" id="warningToast"  aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-warning text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Warning Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the warning background color utility on the toast header.</div>
+        </div>
+        <div class="toast" role="alert" id="dangerToast"  aria-live="assertive" aria-atomic="true" data-delay="1500">
+            <div class="toast-header bg-danger text-white">
+                <i data-feather="alert-circle"></i>
+                <strong class="mr-auto">Danger Text Toast</strong>
+                <small class="text-white-50 ml-2">just now</small>
+                <button class="ml-2 mb-1 btn-close btn-close-white" type="button" data-bs-dismiss="toast" aria-label="Close"> </button>
+            </div>
+            <div class="toast-body">This toast uses the danger background color utility on the toast header.</div>
+        </div>
+    </div>
+
+    <!--Toast modal End-->
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ url('public/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
