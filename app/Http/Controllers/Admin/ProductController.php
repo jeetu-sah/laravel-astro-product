@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductType;
 
 
 class ProductController extends Controller
@@ -145,6 +146,74 @@ class ProductController extends Controller
     }
 
     /**
+     * Store a product store.
+     */
+    public function editProductDetails(Request $request, $id)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'parentCategory'    => 'required',
+            'productName'       => 'required',
+            'productCode'       => 'required',
+            'basic_price'       => 'required',
+            'productType'       => 'required',
+            'productStatus'     => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        DB::beginTransaction();
+        try {
+
+            $product = Product::findOrFail($id);
+            if ($product) {
+
+                $product->category_id = $request->parentCategory;
+                $product->product_code = $request->productCode;
+                $product->basic_price = $request->basic_price;
+                $product->product_type = $request->productType;
+                $product->product_status = $request->productStatus;
+
+                $product->translate('en')->product_name = $request->productName;
+                $product->translate('en')->slug_name = Str::slug($request->productName, '-');
+                $product->translate('en')->short_description = $request->shortDescriptionProduct;
+                $product->translate('en')->description = $request->descriptionProduct;
+
+                $product->save();
+
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'toast' => '#successToast',
+                    'type' => 'toggle',
+                    'showtab' => 'productDetailView',
+                    'hidetab' => 'productDetailEdit',
+                    'msg' => "Record Update Successfully!"
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 500,
+                    'toast' => '#warningToast',
+                    'msg' => "Product does not exists!"
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'status' => 500,
+                'toast' => '#dangerToast',
+                'msg' => "Something went wrong, please try agin!"
+            ]);
+        }
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(Product $product)
@@ -160,6 +229,8 @@ class ProductController extends Controller
         $data['title'] = 'Product Edit';
         $data['product'] = $product;
         $data['productsImages'] = $product->images;
+        $data['categories'] = Category::all();
+        $data['productTypes'] = ProductType::all();
 
         return view('product.edit', $data);
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('locale', 10);
 
             // Translatable fields
-            $table->string('product_name');
+            $table->text('product_name');
             $table->string('slug_name');
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();

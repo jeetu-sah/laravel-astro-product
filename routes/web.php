@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('product/agaxList', [ProductController::class, 'list']);
         Route::delete('product/{productId}/delete-image/{productImageId}', [ProductController::class, 'removeImage']);
         Route::match(['get', 'post'], 'product/{productId}/upload-image', [ProductController::class, 'uploadImage']);
+        Route::post('product/{id}/product-details', [ProductController::class, 'editProductDetails'])->name('product.product_details');
         Route::post('product/{id}/seo', [ProductController::class, 'storeSeo'])->name('product.seo');
         Route::resource('product', ProductController::class);
 

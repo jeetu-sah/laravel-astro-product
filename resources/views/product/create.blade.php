@@ -115,13 +115,10 @@
         theme: 'snow'
     });
 
-
     $(document).on('blur', '#descriptionProductEditor', function(e) {
         e.preventDefault();
         $('#shortDescriptionProduct').val(shortDescriptionQuillProduct.root.innerHTML);
     });
-
-
 
     const descriptionProduct = new Quill('#descriptionProductEditor', {
         theme: 'snow'

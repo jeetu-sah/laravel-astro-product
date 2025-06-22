@@ -10,6 +10,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\ProductVariant;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model implements TranslatableContract
 {
@@ -27,7 +28,7 @@ class Product extends Model implements TranslatableContract
      *
      * @var list<string>
      */
-    
+
     protected $fillable = [
         'id',
         'category_id',
@@ -57,6 +58,11 @@ class Product extends Model implements TranslatableContract
     public function images(): BelongsToMany
     {
         return $this->belongsToMany(ImageGallery::class, 'product_images', 'product_id', 'image_id')->withPivot('id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function productFirstImageUrl(): Attribute

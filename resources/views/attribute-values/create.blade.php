@@ -74,9 +74,9 @@
                                             @forelse($attributeValues as $attributeValue)
                                             <tr class="even">
                                                 <td class="sorting_1">{{$attributeValue->value ?? '--'}}</td>
-                                                <td>{{$attributeValue->value ?? '--'}}</td>
-                                                <td>{{$attributeValue->value ?? '--'}}</td>
-                                                <td>21</td>
+                                                <td>{{$attributeValue->slug ?? '--'}}</td>
+                                                <td>{{$attributeValue->sort_order ?? '--'}}</td>
+                                                <td>--</td>
                                             </tr>
                                             @empty
                                             <tr class="even">

@@ -13,6 +13,7 @@
 Run the below command on the terminal, in the root directory
 - Composer Install
 - php artisan migrate
+- php artisan db:seed
 - php artisan db:seed --class=AdminSeeder
 - php artisan key:generate
 - php artisan storage:link
