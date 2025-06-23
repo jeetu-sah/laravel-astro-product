@@ -177,5 +177,5 @@
         $('#descriptionProduct').val(descriptionProduct.root.innerHTML);
     });
 </script>
-<script src="{{ asset('public/custom-js/custom-javascript.js') }}" defer></script>
+
 @endsection

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -315,7 +317,10 @@
         </div>
     </div>
 
- 
+
+    
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ url('public/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -361,6 +366,7 @@
 
     @section('script')
     @show
+    <script src="{{ asset('public/custom-js/custom-javascript.js') }}" defer></script>
 </body>
 
 </html>
