@@ -20,7 +20,7 @@
 
                 <!-- Edit Mode -->
                 <div id="seoEdit" style="display: none;">
-                    <form action="{{ route('catalog.product.seo', ['id' => $product->id]) }}" method="POST">
+                    <form action="{{ route('catalog.product.seo', ['id' => $product->id]) }}" data-request="ajaxSubmit" method="POST">
                         @csrf()
                         <div class="mb-3">
                             <label for="seoTitle" class="form-label">Meta Title</label>
@@ -43,7 +43,7 @@
                                 rows="3">{{$product->meta_description}}</textarea>
                         </div>
 
-                        <button class="btn btn-sm btn-success ajaxSubmit" data-submit="ajaxSubmit" type="submit">Save</button>
+                        <button class="btn btn-sm btn-success ajaxSubmit" type="submit">Save</button>
                         <button type="button" class="btn btn-sm btn-secondary editSeo" data-tab="list">Cancel</button>
                     </form>
                 </div>

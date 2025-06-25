@@ -1,10 +1,15 @@
-$(document).on("submit", "form", function (e) {
+$(document).on("submit", "form[data-request='ajaxSubmit']", function (e) {
     e.preventDefault();
 
     const $form = $(this);
     const formData = new FormData(this);
     const url = $form.attr("action");
     const method = $form.attr("method") || "POST";
+
+    const $submitButton = $form.children("button[type='submit']");
+    const submitButtonText = $submitButton.text();
+
+    $submitButton.text("Loading...").prop("disabled", true);
 
     $.ajax({
         url: url,
@@ -18,19 +23,23 @@ $(document).on("submit", "form", function (e) {
         },
         success: function (response) {
             if (response.status == "success") {
-                var toastEl = $(response.toast);
-                toastEl.children(".toast-body").html(response.msg);
-                $(response.toast).toast("show");
-
                 if (response.type == "toggle") {
                     $(`#${response.hidetab}`).hide();
                     $(`#${response.showtab}`).show();
                 }
             }
+            showPositionToast(response.status, response.msg);
+
+            $submitButton.text(submitButtonText).prop("disabled", false);
         },
         error: function (xhr) {
-            alert("Something went wrong!");
+            showPositionToast(
+                "danger",
+                "Something went wrong, please try again."
+            );
             console.log(xhr.responseText);
+
+            $submitButton.text(submitButtonText).prop("disabled", false);
         },
     });
 });

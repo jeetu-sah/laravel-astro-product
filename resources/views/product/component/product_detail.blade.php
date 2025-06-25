@@ -30,7 +30,7 @@
 
                 <!-- Edit Mode -->
                 <div id="productDetailEdit" style="display: none;">
-                    <form action="{{ route('catalog.product.product_details', ['id' => $product->id]) }}" method="POST">
+                    <form action="{{ route('catalog.product.product_details', ['id' => $product->id]) }}" data-request="ajaxSubmit" method="POST">
                         @csrf()
                         <div class="form-group">
                             <label for="parentCategory" class="small">Select Product Category</label>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-sm btn-success ajaxSubmit" data-submit="ajaxSubmit" type="submit">{{ __('Save')}}</button>
+                        <button class="btn btn-sm btn-success"  type="submit">{{ __('Save')}}</button>
                         <button type="button" class="btn btn-sm btn-secondary editProductDetail" data-tab="list">{{ __('Cancel')}}</button>
                     </form>
                 </div>

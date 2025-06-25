@@ -150,7 +150,6 @@ class ProductController extends Controller
      */
     public function editProductDetails(Request $request, $id)
     {
-
         $validator = Validator::make($request->all(), [
             'parentCategory'    => 'required',
             'productName'       => 'required',
@@ -189,7 +188,6 @@ class ProductController extends Controller
                 DB::commit();
                 return response()->json([
                     'status' => 'success',
-                    'toast' => '#successToast',
                     'type' => 'toggle',
                     'showtab' => 'productDetailView',
                     'hidetab' => 'productDetailEdit',
@@ -259,7 +257,7 @@ class ProductController extends Controller
         }
 
         if ($request->isMethod('post')) {
-            if (count($request->images) > 0) {
+            if (($request->images)) {
                 $data['product']->images()->attach($request->images);
 
                 return redirect()->back()->with(["msg" => "<div class='bg-success text-white'><strong>Success </strong> Images save successfully !!! </div>"]);

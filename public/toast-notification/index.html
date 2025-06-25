@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery SwipeToast Examples</title>
+    <style>
+      body {
+        font-family: Inter;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fafaf7;
+      }
+
+      .demo-section {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      h1 {
+        color: #1a1a1a;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #2196f3;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+      }
+
+      .btn-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #2196f3;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.2s ease;
+      }
+
+      button:hover {
+        background: #1976d2;
+      }
+
+      button.success {
+        background: #00c853;
+      }
+
+      button.success:hover {
+        background: #009624;
+      }
+
+      button.error {
+        background: #ff3d00;
+      }
+
+      button.error:hover {
+        background: #dd2c00;
+      }
+
+      button.warning {
+        background: #ffc107;
+      }
+
+      button.warning:hover {
+        background: #ffa000;
+      }
+
+      code {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        display: block;
+        margin: 10px 0;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1a1a1a;
+        }
+
+        .demo-section {
+          background: #2d2d2d;
+        }
+
+        h1 {
+          color: #ffffff;
+        }
+
+        code {
+          background: #363636;
+          color: #fff;
+        }
+      }
+
+      .example-code {
+        border-radius: 8px;
+        margin: 15px 0;
+        overflow-x: auto;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+      }
+
+      .feature-list li {
+        background: rgba(33, 150, 243, 0.1);
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      .demo-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .demo-header select {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .feature-list li {
+          background: rgba(33, 150, 243, 0.15);
+          color: white;
+        }
+
+        .demo-header select {
+          background: #363636;
+          color: #fff;
+          border-color: #444;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="jquery.swipetoast.min.css" />
+  </head>
+
+  <body>
+    <h1>jQuery SwipeToast Examples</h1>
+    <style>
+      .download {
+        padding: 1.25rem;
+        border: 0;
+        border-radius: 3px;
+        background-color: #4f46e5;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .download:hover {
+        color: #fff;
+      }
+      #carbonads {
+        display: block;
+        overflow: hidden;
+        max-width: 728px;
+        position: relative;
+        font-size: 22px;
+        box-sizing: content-box;
+      }
+      #carbonads > span {
+        display: block;
+      }
+      #carbonads a {
+        color: #4f46e5;
+        text-decoration: none;
+      }
+      #carbonads a:hover {
+        color: #4f46e5;
+      }
+      .carbon-wrap {
+        display: flex;
+        align-items: center;
+      }
+      .carbon-img {
+        display: block;
+        margin: 0;
+        line-height: 1;
+      }
+      .carbon-img img {
+        display: block;
+        height: 90px;
+        width: auto;
+      }
+      .carbon-text {
+        display: block;
+        padding: 0 1em;
+        line-height: 1.35;
+        text-align: left;
+      }
+      .carbon-poweredby {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 6px 10px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        font-size: 8px;
+        border-top-left-radius: 4px;
+        line-height: 1;
+        color: #aaa !important;
+      }
+      @media only screen and (min-width: 320px) and (max-width: 759px) {
+        .carbon-text {
+          font-size: 14px;
+        }
+      }
+    </style>
+    <div>
+      <div id="carbon-block"></div>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2783044520727903"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <p style="margin: 2rem auto">
+      <a
+        class="download"
+        href="https://www.jqueryscript.net/other/swipe-to-dismiss-toast.html"
+        >Download This Plugin</a
+      >
+      <a class="download" href="https://www.jqueryscript.net/"
+        >Back To jQueryScript</a
+      >
+    </p>
+    <p class="lead">
+      A lightweight jQuery plugin for creating customizable, swipe-to-dismiss
+      toast notifications. Supports multiple types and positions.
+    </p>
+    <!-- Basic Examples -->
+    <div class="demo-section">
+      <div class="demo-header">
+        <h2>Basic Toast Types</h2>
+        <select id="toastDuration">
+          <option value="4000">4 seconds</option>
+          <option value="2000">2 seconds</option>
+          <option value="6000">6 seconds</option>
+          <option value="-1">No auto-close</option>
+        </select>
+      </div>
+      <div class="btn-group">
+        <button onclick="showDefaultToast()">Default Toast</button>
+        <button class="success" onclick="showSuccessToast()">
+          Success Toast
+        </button>
+        <button class="error" onclick="showErrorToast()">Error Toast</button>
+        <button class="warning" onclick="showWarningToast()">
+          Warning Toast
+        </button>
+      </div>
+      <div class="example-code">
+        <code
+          >// Basic usage $.swipeToast({ message: 'Your message here', type:
+          'success', // 'default', 'success', 'error', 'warning', 'info'
+          duration: 4000, // Duration in milliseconds position: 'bottom-center'
+          });</code
+        >
+      </div>
+    </div>
+
+    <!-- Position Examples -->
+    <div class="demo-section">
+      <h2>Positions</h2>
+      <div class="btn-group">
+        <button onclick="showPositionToast('top-left')">Top Left</button>
+        <button onclick="showPositionToast('top-center')">Top Center</button>
+        <button onclick="showPositionToast('top-right')">Top Right</button>
+        <button onclick="showPositionToast('center-left')">Center Left</button>
+        <button onclick="showPositionToast('center')">Center</button>
+        <button onclick="showPositionToast('center-right')">
+          Center Right
+        </button>
+        <button onclick="showPositionToast('bottom-left')">Bottom Left</button>
+        <button onclick="showPositionToast('bottom-center')">
+          Bottom Center
+        </button>
+        <button onclick="showPositionToast('bottom-right')">
+          Bottom Right
+        </button>
+      </div>
+    </div>
+
+    <!-- Advanced Features -->
+    <div class="demo-section">
+      <h2>Advanced Features</h2>
+      <div class="btn-group">
+        <button onclick="showCustomToast()">Custom Toast</button>
+        <button onclick="showProgressToast()">With Progress</button>
+        <button onclick="showCloseButtonToast()">With Close Button</button>
+        <button onclick="showCallbackToast()">With Callbacks</button>
+        <button onclick="showRTLToast()">RTL Support</button>
+        <button onclick="showStackedToast()">Stacked Toasts</button>
+      </div>
+      <div class="example-code">
+        <code
+          >// Advanced usage $.swipeToast({ message: 'Advanced toast example',
+          type: 'info', duration: 5000, position: 'bottom-right', progressBar:
+          true, closeButton: true, rtl: false, className: 'custom-toast',
+          onOpen: function () { console.log('Toast opened'); }, onClose:
+          function () { console.log('Toast closed'); } });</code
+        >
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="jquery.swipetoast.min.js"></script>
+    <script>
+      // Get duration from select
+      function getDuration() {
+        const duration = parseInt($("#toastDuration").val());
+        return duration === -1 ? false : duration;
+      }
+      // Basic Toasts
+      function showDefaultToast() {
+        $.swipeToast({
+          message: "This is a default toast message",
+          duration: getDuration(),
+        });
+      }
+
+      function showSuccessToast() {
+        $.swipeToast({
+          message: "Operation completed successfully! 🎉",
+          type: "success",
+          duration: getDuration(),
+        });
+      }
+
+      function showErrorToast() {
+        $.swipeToast({
+          message: "An error occurred. Please try again. ❌",
+          type: "error",
+          duration: getDuration(),
+        });
+      }
+
+      function showWarningToast() {
+        $.swipeToast({
+          message: "Warning: Please check your input. ⚠️",
+          type: "warning",
+          duration: getDuration(),
+        });
+      }
+      // Position Toasts
+      function showPositionToast(position) {
+        $.swipeToast({
+          message: `Toast position: ${position}`,
+          type: "info",
+          position: position,
+          duration: getDuration(),
+        });
+      }
+      // Advanced Toasts
+      function showCustomToast() {
+        $.swipeToast({
+          message: "Custom styled toast with longer duration",
+          type: "info",
+          duration: getDuration(),
+          className: "custom-toast",
+          progressBar: true,
+        });
+      }
+
+      function showProgressToast() {
+        $.swipeToast({
+          message: "Toast with progress bar ⏳",
+          type: "info",
+          duration: 5000,
+          progressBar: true,
+        });
+      }
+
+      function showCloseButtonToast() {
+        $.swipeToast({
+          message: "Click the X or swipe to dismiss",
+          type: "info",
+          duration: false,
+          closeButton: true,
+        });
+      }
+
+      function showCallbackToast() {
+        $.swipeToast({
+          message: "Check console for callback logs",
+          type: "success",
+          duration: getDuration(),
+          onOpen: function () {
+            console.log("Toast opened:", new Date().toISOString());
+          },
+          onClose: function () {
+            console.log("Toast closed:", new Date().toISOString());
+          },
+        });
+      }
+
+      function showRTLToast() {
+        $.swipeToast({
+          message: "پیام تست راست به چپ",
+          type: "info",
+          duration: getDuration(),
+          rtl: true,
+        });
+      }
+
+      function showStackedToast() {
+        for (let i = 1; i <= 3; i++) {
+          setTimeout(() => {
+            $.swipeToast({
+              message: `Stacked toast ${i} of 3`,
+              type: "info",
+              duration: 4000,
+            });
+          }, i * 500);
+        }
+      }
+      // Show welcome toast on page load
+      $(document).ready(function () {
+        setTimeout(function () {
+          $.swipeToast({
+            message:
+              "👋 Welcome to SwipeToast Demo! Try different examples below.",
+            type: "success",
+            duration: 5000,
+            position: "top-center",
+            progressBar: true,
+          });
+        }, 1000);
+      });
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1VDDWMRSTH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1VDDWMRSTH");
+    </script>
+    <script>
+      try {
+        fetch(
+          new Request(
+            "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+            { method: "HEAD", mode: "no-cors" }
+          )
+        )
+          .then(function (response) {
+            return true;
+          })
+          .catch(function (e) {
+            var carbonScript = document.createElement("script");
+            carbonScript.src =
+              "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+            carbonScript.id = "_carbonads_js";
+            document.getElementById("carbon-block").appendChild(carbonScript);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    </script>
+  </body>
+</html>

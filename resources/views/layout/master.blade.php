@@ -18,22 +18,17 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ url('public/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <!-- -------------------------------------------------------------------------------------- -->
+    <link href="{{ url('public/assets/css/sb-admin-2.min.css') }}" rel="stylesheet" />
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset('public/toast-notification/jquery.swipetoast.min.css') }}" />
 
-    <!-- -------------------------------------------------------------------------------------- -->
     <!-- Quill CSS -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-    <!-- -------------------------------------------------------------------------------------- -->
     <!-- test search select scripts -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- -------------------------------------------------------------------------------------- -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
     @section('style')
     @show
 </head>
@@ -318,7 +313,7 @@
     </div>
 
 
-    
+
 
 
     <!-- Bootstrap core JavaScript-->
@@ -337,15 +332,13 @@
     <!-- Page level custom scripts -->
     <script src="{{ url('public/assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url('public/assets/js/demo/chart-pie-demo.js') }}"></script>
-    <!-- -------------------------------------------------------------------------------------- -->
+
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    <!-- -------------------------------------------------------------------------------------- -->
-
     <!-- Quill JS -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <!-- -------------------------------------------------------------------------------------- -->
+
     <!-- search select -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
@@ -360,6 +353,24 @@
                 allowClear: true
             });
         });
+
+        /****Position Toasts show notification start *******/
+        function getDuration() {
+            const duration = parseInt($("#toastDuration").val());
+            return duration === -1 ? false : duration;
+        }
+
+        function showPositionToast(type, msg) {
+            $.swipeToast({
+                message: `${msg}`,
+                type: type,
+                position: 'top-right',
+                duration: getDuration(),
+                closeButton: true,
+                progressBar: true,
+            });
+        }
+        /****Position Toasts show notification End *******/
     </script>
     <!-- -------------------------------------------------------------------------------------- -->
 
@@ -367,6 +378,7 @@
     @section('script')
     @show
     <script src="{{ asset('public/custom-js/custom-javascript.js') }}" defer></script>
+    <script src="{{ asset('public/toast-notification/jquery.swipetoast.min.js') }}"></script>
 </body>
 
 </html>
