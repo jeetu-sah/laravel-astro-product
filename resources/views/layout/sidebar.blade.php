@@ -20,7 +20,14 @@
      </li>
 
      <!-- Divider -->
+     <hr class="sidebar-divider my-0">
+     <li class="nav-item active">
+         <a class="nav-link" href="index.html">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span>{{__('Sales') }}</span></a>
+     </li>
      <hr class="sidebar-divider">
+     <!-- Divider -->
 
      <!-- Heading -->
      <div class="sidebar-heading">
@@ -46,7 +53,7 @@
 
                  <a class="collapse-item" href="{{ route('catalog.category.index') }}">Category</a>
                  <a class="collapse-item" href="{{ route('catalog.product.index') }}">Products</a>
-                 
+
              </div>
          </div>
      </li>
@@ -63,7 +70,82 @@
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
                  <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
-              
+
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+             aria-expanded="true">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Users</span>
+         </a>
+         <div id="collapseUsers" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('image-gallery.create') }}">{{__('Customers')}}</a>
+                 <a class="collapse-item" href="{{ route('image-gallery.index') }}">{{__('Users Group')}}</a>
+
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+             aria-expanded="true">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Orders</span>
+         </a>
+         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
+                 <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
+
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+             aria-expanded="true">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Marketing</span>
+         </a>
+         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
+                 <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
+
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+             aria-expanded="true">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>{{__('Settings') }}</span>
+         </a>
+         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
+                 <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
+
+             </div>
+         </div>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+             aria-expanded="true">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>{{__('Locale') }}</span>
+         </a>
+         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
+                 <a class="collapse-item" href="{{ route('image-gallery.index') }}">List</a>
+
              </div>
          </div>
      </li>
