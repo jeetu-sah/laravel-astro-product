@@ -90,12 +90,13 @@
          </div>
      </li>
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+         <a class="nav-link collapsed" 
+            href="#" data-toggle="collapse" data-target="#collapseOrders"
              aria-expanded="true">
              <i class="fas fa-fw fa-cog"></i>
              <span>Orders</span>
          </a>
-         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+         <div id="collapseOrders" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
@@ -105,12 +106,13 @@
          </div>
      </li>
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" 
+            data-target="#collapseMarketing"
              aria-expanded="true">
              <i class="fas fa-fw fa-cog"></i>
              <span>Marketing</span>
          </a>
-         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+         <div id="collapseMarketing" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
@@ -120,12 +122,12 @@
          </div>
      </li>
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
              aria-expanded="true">
              <i class="fas fa-fw fa-cog"></i>
              <span>{{__('Settings') }}</span>
          </a>
-         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+         <div id="collapseSettings" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
@@ -135,12 +137,12 @@
          </div>
      </li>
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImageGallery"
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLocale"
              aria-expanded="true">
              <i class="fas fa-fw fa-cog"></i>
              <span>{{__('Locale') }}</span>
          </a>
-         <div id="collapseImageGallery" class="collapse" aria-labelledby="headingUtilities"
+         <div id="collapseLocale" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('image-gallery.create') }}">Upload</a>
